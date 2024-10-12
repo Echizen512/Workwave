@@ -8,7 +8,32 @@
     <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|IBM+Plex+Sans:600" rel="stylesheet">
     <link rel="stylesheet" href="dist/css/style.css">
     <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
+
+<style>
+    /* Add this CSS to your existing stylesheet or in a <style> tag */
+.text-center {
+    text-align: center; /* Centers text horizontally */
+}
+
+.row {
+    display: flex; /* Enables flexbox layout */
+    justify-content: center; /* Centers columns horizontally */
+}
+
+.col-lg-3,
+.col-md-6 {
+    display: flex; /* Enables flexbox for each column */
+    flex-direction: column; /* Stacks items vertically */
+    align-items: center; /* Centers items horizontally */
+    justify-content: center; /* Centers items vertically */
+    margin: 25px; /* Adds some space between columns */
+}
+
+</style>
+
 <body class="is-boxed has-animations">
     <div class="body-wrap boxed-container">
         <header class="site-header">
@@ -59,6 +84,137 @@
                 </div>
             </section>
             
+            <div class="container-fluid py-2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7 m-0 my-lg-5 pt-0 pt-lg-5 pr-lg-5">
+                            <h1 class="mb-4">¿Por Qué Elegirnos?</h1>
+                            <p>En WorkWake, unimos a profesionales altamente calificados con empresas que buscan su talento. Nuestra plataforma está diseñada para ser intuitiva y eficiente, facilitando la búsqueda del trabajo o el talento perfecto.</p>
+                            <div class="row">
+                                <div class="col-sm-6 mb-4">
+                                    <h1 class="text-secondary" data-toggle="counter-up">600+</h1>
+                                    <h5 class="font-weight-bold">Proyectos Completados</h5>
+                                </div>
+                                <div class="col-sm-6 mb-4">
+                                    <h1 class="text-secondary" data-toggle="counter-up">400+</h1>
+                                    <h5 class="font-weight-bold">Profesionales Registrados</h5>
+                                </div>
+                                <div class="col-sm-6 mb-4">
+                                    <h1 class="text-secondary" data-toggle="counter-up">1200+</h1>
+                                    <h5 class="font-weight-bold">Empresas Satisfechas</h5>
+                                </div>
+                                <div class="col-sm-6 mb-4">
+                                    <h1 class="text-secondary" data-toggle="counter-up">200+</h1>
+                                    <h5 class="font-weight-bold">Ofertas de Trabajo Activas</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="d-flex flex-column align-items-center justify-content-center bg-primary h-100 py-5 px-3">
+                                <i class="fa fa-5x fa-tasks text-white mb-5"></i>
+                                <h1 class="display-1 text-white mb-3">600+</h1>
+                                <h1 class="text-white m-0">Proyectos Completados</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-fluid pt-5">
+                <div class="container">
+                    <h1 class="section-title text-center mb-5">Cómo Funcionamos</h1>
+                    <div class="row">
+                        <!-- Paso 1: Registrarse -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center mb-5">
+                                <div class="bg-light text-center border rounded-circle d-flex align-items-center justify-content-center mb-4" 
+                                     style="width: 270px; height: 120px;">
+                                    <i class="fas fa-user-plus text-secondary" style="font-size: 4rem;"></i>
+                                </div>
+                                <h3 class="font-weight-bold m-0 mt-2">Registrarse</h3>
+                                <p class="text-sm text-muted">Crear un perfil y empezar a navegar por las oportunidades.</p>
+                            </div>
+                        </div>
+            
+                        <!-- Paso 2: Buscar Trabajo o Talento -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center mb-5">
+                                <div class="bg-light border rounded-circle d-flex align-items-center justify-content-center mb-4" 
+                                     style="width: 270px; height: 120px;">
+                                    <i class="fas fa-search text-secondary" style="font-size: 4rem;"></i>
+                                </div>
+                                <h3 class="font-weight-bold m-0 mt-2">Buscar Trabajo o Talento</h3>
+                                <p class="text-sm text-muted">Explora proyectos o candidatos que se ajusten a tus necesidades.</p>
+                            </div>
+                        </div>
+            
+                        <!-- Paso 3: Conectar -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center mb-5">
+                                <div class="bg-light border rounded-circle d-flex align-items-center justify-content-center mb-4" 
+                                     style="width: 260px; height: 120px;">
+                                    <i class="fas fa-comments text-secondary" style="font-size: 4rem;"></i>
+                                </div>
+                                <h3 class="font-weight-bold m-0 mt-2">Conectar</h3>
+                                <p class="text-sm text-muted">Contacta a profesionales o empresas para discutir detalles.</p>
+                            </div>
+                        </div>
+            
+                        <!-- Paso 4: Concretar -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center mb-5">
+                                <div class="bg-light border rounded-circle d-flex align-items-center justify-content-center mb-4" 
+                                    style="width: 150px; height: 120px;">
+                                    <i class="fas fa-handshake text-secondary" style="font-size: 4rem;"></i>
+                                </div>
+                                <h3 class="font-weight-bold m-0 mt-2">Concretar</h3>
+                                <p class="text-sm text-muted">Finaliza acuerdos y comienza el proyecto.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="container-fluid pt-5 pb-3">
+                <div class="container">
+                    <h1 class="display-4 text-center mb-5">Lo Que Ofrecemos</h1>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 pb-1">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center bg-light mb-4 px-4" style="height: 300px;">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-white shadow rounded-circle mb-4" style="width: 150px; height: 100px;">
+                                    <i class="fas fa-code text-secondary fa-3x"></i>
+                                </div>
+                                <h4 class="font-weight-bold m-0">Desarrolladores</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 pb-1">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center bg-light mb-4 px-4" style="height: 300px;">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-white shadow rounded-circle mb-4" style="width: 200px; height: 100px;">
+                                    <i class="fas fa-pencil-alt text-secondary fa-3x"></i>
+                                </div>
+                                <h4 class="font-weight-bold m-0">Diseñadores Gráficos</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 pb-1">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center bg-light mb-4 px-4" style="height: 300px;">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-white shadow rounded-circle mb-4" style="width: 150px; height: 100px;">
+                                    <i class="fas fa-clipboard-check text-secondary fa-3x"></i>
+                                </div>
+                                <h4 class="font-weight-bold m-0">Control de Calidad</h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 pb-1">
+                            <div class="d-flex flex-column align-items-center justify-content-center text-center bg-light mb-4 px-4" style="height: 300px;">
+                                <div class="d-inline-flex align-items-center justify-content-center bg-white shadow rounded-circle mb-4" style="width: 240px; height: 100px;">
+                                    <i class="fas fa-chart-bar text-secondary fa-3x"></i>
+                                </div>
+                                <h4 class="font-weight-bold m-0">Consultores de Negocios</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <section class="features section">
                 <div class="container">
@@ -139,7 +295,7 @@
             <div class="container">
                 <div class="site-footer-inner">
                     <div class="footer-copyright">
-                        &copy; 2018 Switch, all rights reserved
+                        &copy; 2024 WorkWave
                     </div>
                 </div>
             </div>
