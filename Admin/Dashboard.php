@@ -67,41 +67,43 @@
 <body>
 
 
-    <div class="header bg-primary">
+<div class="header bg-primary">
         <div>
-        <h2 style="font-size: 30px; margin-left: 15px;">WorkWave</h2>
+            <h2 style="font-size: 30px; margin-left: 15px;">WorkWave</h2>
         </div>
         <a href="./logout.php">
-    <button class="logout-btn">
-        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
-    </button>
+            <button class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </button>
         </a>
     </div>
 
-
     <div class="sidebar bg-primary">
-    <a href="./Empresas.php" style="color: white;">
-        <i class="fas fa-building icon" style="color: white;"></i> Empresas
-    </a>
-    <a href="./Contratistas.php" style="color: white;">
-        <i class="fas fa-user-tie icon" style="color: white;"></i> Contratistas
-    </a>
-    <a href="./Freelancers.php" style="color: white;">
-        <i class="fas fa-laptop-code icon" style="color: white;"></i> Freelancers
-    </a>
-    <a href="./Categorias.php" style="color: white;">
-        <i class="fas fa-tags icon" style="color: white;"></i> Categorias
-    </a>
-    <a href="./Proyectos.php" style="color: white;">
-    <i class="fas fa-project-diagram icon" style="color: white;"></i> Proyectos
-    </a>
-    <a href="./Auditoria.php" style="color: white;">
-    <i class="fas fa-file-alt icon" style="color: white;"></i> Auditoría
-</a>
-
-
-</div>
-
+        <a href="./Empresas.php" style="color: white;">
+            <i class="fas fa-building icon" style="color: white;"></i> Empresas
+        </a>
+        <a href="./Contratistas.php" style="color: white;">
+            <i class="fas fa-user-tie icon" style="color: white;"></i> Contratistas
+        </a>
+        <a href="./Freelancers.php" style="color: white;">
+            <i class="fas fa-laptop-code icon" style="color: white;"></i> Freelancers
+        </a>
+        <a href="./Categorias.php" style="color: white;">
+            <i class="fas fa-tags icon" style="color: white;"></i> Categorias
+        </a>
+        <a href="./Proyectos.php" style="color: white;">
+            <i class="fas fa-project-diagram icon" style="color: white;"></i> Proyectos
+        </a>
+        <a href="./Reportes.php" style="color: white;">
+            <i class="fas fa-file-alt icon" style="color: white;"></i> Reportes
+        </a>
+        <a href="./Graficas.php" style="color: white;">
+            <i class="fas fa-chart-pie icon" style="color: white;"></i> Gráficas
+        </a>
+        <a href="./Auditoria.php" style="color: white;">
+            <i class="fas fa-search icon" style="color: white;"></i> Auditoría
+        </a>
+    </div>
 
     <script src="../Assets/js/jquery-3.6.0.min.js"></script>
     <script src="../Assets/js/bootstrap.bundle.min.js"></script>

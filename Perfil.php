@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
 include './config/conexion.php';
 include "./Includes/Header.php";
 
-$userId = $_SESSION['user_id'];  // Cambiar de $_SESSION['user'] a $_SESSION['user_id']
+$userId = $_SESSION['user_id'];  
 $role = $_SESSION['role'];
 $table = "";
 
@@ -108,7 +108,7 @@ $conn->close();
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" action="./Includes/update_profile.php">
+                        <form method="post" action="./Includes/update_profile.php" enctype="multipart/form-data">
                             <div class="row mb-3">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Nombre</h6>
@@ -149,10 +149,78 @@ $conn->close();
                                     <input type="text" class="form-control" name="image_url" value="<?php echo htmlspecialchars($userData['image_url']); ?>">
                                 </div>
                             </div>
-                            <div class="row">
+
+                            <!-- Campo para subir sitio web -->
+                            <?php if ($role === 'empresas'): ?>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Sitio Web</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="url" class="form-control" name="sitio_web" value="<?php echo htmlspecialchars($userData['sitio_web'] ?? ''); ?>">
+                                </div>
+                            </div>
+                            <?php endif; ?>
+
+                            <!-- Campo para subir portafolio -->
+                            <?php if ($role === 'contratistas' || $role === 'freelancers'): ?>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Portafolio (URL)</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="url" class="form-control" name="portafolio" value="<?php echo htmlspecialchars($userData['portafolio'] ?? ''); ?>">
+                                </div>
+                            </div>
+                            <?php endif; ?>
+
+                            <!-- Campo para subir documento RIF -->
+                            <?php if ($role === 'empresas' || $role === 'contratistas'): ?>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Documento RIF</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="file" class="form-control" name="doc_rif" accept=".pdf,.png,.jpg,.jpeg">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="submit" class="btn btn-primary px-4" value="Guardar Cambios">
+                                    <?php if (!empty($userData['doc_rif'])): ?>
+                                        <a href="/Anderson/Assets/doc/<?php echo basename($userData['doc_rif']); ?>" class="btn btn-success me-2" download>Descargar RIF</a>
+
+
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+
+                            <!-- Campo para subir curriculum -->
+                            <?php if ($role === 'contratistas' || $role === 'freelancers'): ?>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Currículum</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="file" class="form-control" name="curriculum" accept=".pdf,.doc,.docx">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9 text-secondary">
+                                    <?php if (!empty($userData['curriculum'])): ?>
+                                        <a href="/Anderson/Assets/doc/<?php echo basename($userData['curriculum']); ?>" class="btn btn-success me-2" download>Descargar Currículum</a>
+
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+
+                            <div class="row mb-3">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9 text-secondary">
+                                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                                 </div>
                             </div>
                         </form>
@@ -162,8 +230,5 @@ $conn->close();
         </div>
     </div>
 </div>
-
-<?php include "./Includes/Footer.php"; ?>
-
 </body>
 </html>
