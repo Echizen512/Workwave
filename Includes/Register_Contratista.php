@@ -60,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,111 +73,112 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <style>
     body {
-    background-image: url('../Assets/images/2312616.jpg');
-    font-family: 'Arial', sans-serif;
-    background-color: #abdcdf;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80%;
-    margin: 20px; 
-}
+        background-image: url('../Assets/images/2312616.jpg');
+        font-family: 'Arial', sans-serif;
+        background-color: #abdcdf;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80%;
+        margin: 20px;
+    }
 
-.form-container {
-    background: #fff;
-    padding: 20px; 
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 700px;
-    box-sizing: border-box;
-}
-
-h2 {
-    margin-top: 0;
-    color: #333;
-    font-size: 24px; 
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 15px; 
-}
-
-label {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px; 
-    font-weight: bold;
-    color: #444;
-    font-size: 14px; 
-}
-
-label i {
-    margin-right: 8px; 
-    color: #007BFF;
-    font-size: 16px; 
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-textarea {
-    width: 100%;
-    padding: 12px; 
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 120px; 
-}
-
-button {
-    width: 100%;
-    padding: 12px; 
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px; 
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Media Query para pantallas pequeñas */
-@media (max-width: 768px) {
     .form-container {
-        padding: 15px; /* Ajustar padding en pantallas pequeñas */
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 700px;
+        box-sizing: border-box;
     }
 
     h2 {
-        font-size: 20px;
+        margin-top: 0;
+        color: #333;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
     }
 
     label {
-        font-size: 12px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #444;
+        font-size: 14px;
+    }
+
+    label i {
+        margin-right: 8px;
+        color: #007BFF;
+        font-size: 16px;
     }
 
     input[type="text"],
     input[type="email"],
     input[type="password"],
     textarea {
-        padding: 10px;
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
     }
 
     button {
-        font-size: 14px;
+        width: 100%;
+        padding: 12px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
     }
-}
 
-    </style>
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    /* Media Query para pantallas pequeñas */
+    @media (max-width: 768px) {
+        .form-container {
+            padding: 15px;
+            /* Ajustar padding en pantallas pequeñas */
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        label {
+            font-size: 12px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            padding: 10px;
+        }
+
+        button {
+            font-size: 14px;
+        }
+    }
+</style>
+
 <body>
     <div class="form-container">
         <h2>Registro Contratista</h2>
@@ -198,7 +200,8 @@ button:hover {
                 <input type="text" id="contratista_direccion" name="contratista_direccion" required>
             </div>
             <div class="form-group">
-                <label for="contratista_descripcion"><i class="fas fa-align-left"></i> Descripción de necesidades:</label>
+                <label for="contratista_descripcion"><i class="fas fa-align-left"></i> Descripción de
+                    necesidades:</label>
                 <textarea id="contratista_descripcion" name="contratista_descripcion" required></textarea>
             </div>
             <div class="form-group">
@@ -208,8 +211,9 @@ button:hover {
             <div class="btn-container d-flex justify-content-center">
                 <button type="submit" style="width: 120px;">Registrar</button>
             </div>
-        </form>               
+        </form>
     </div>
     <?php echo $alertScript; ?>
 </body>
+
 </html>

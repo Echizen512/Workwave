@@ -30,7 +30,7 @@ $direccion = isset($_POST['direccion']) ? trim($_POST['direccion']) : '';
 $image_url = isset($_POST['image_url']) ? trim($_POST['image_url']) : '';
 $sitio_web = ($role === 'empresas') ? (isset($_POST['sitio_web']) ? trim($_POST['sitio_web']) : '') : null;
 $portafolio = ($role === 'contratistas' || $role === 'freelancers') ? (isset($_POST['portafolio']) ? trim($_POST['portafolio']) : '') : null;
-$curriculum_path = null; 
+$curriculum_path = null;
 
 
 if ($role === 'freelancers' && isset($_FILES['curriculum']) && $_FILES['curriculum']['error'] == UPLOAD_ERR_OK) {
@@ -39,23 +39,23 @@ if ($role === 'freelancers' && isset($_FILES['curriculum']) && $_FILES['curricul
     $curriculum_path = __DIR__ . '/../Assets/doc/' . basename($curriculum_name);
 
     if (move_uploaded_file($curriculum_tmp_name, $curriculum_path)) {
-        
+
     } else {
         die("Error al mover el archivo a la carpeta Assets/doc.");
     }
 } elseif (($role === 'empresas' || $role === 'contratistas') && isset($_FILES['doc_rif']) && $_FILES['doc_rif']['error'] == UPLOAD_ERR_OK) {
-    
+
     $doc_rif_name = $_FILES['doc_rif']['name'];
     $doc_rif_tmp_name = $_FILES['doc_rif']['tmp_name'];
     $doc_rif_path = __DIR__ . '/../Assets/doc/' . basename($doc_rif_name);
 
     if (move_uploaded_file($doc_rif_tmp_name, $doc_rif_path)) {
-        
+
     } else {
         die("Error al mover el archivo a la carpeta Assets/doc.");
     }
 } else {
-    
+
     if ($role === 'freelancers') {
         $curriculum_path = null;
         echo "Error al subir el archivo del currículum: " . $_FILES['curriculum']['error'];

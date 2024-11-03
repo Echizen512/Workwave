@@ -85,7 +85,9 @@ $conn->close();
                                 <h4><?php echo htmlspecialchars($role === 'empresas' ? $userData['nombre_empresa'] : $userData['nombre']); ?></h4>
                                 <p class="text-secondary mb-1"><?php echo $role === 'empresas' ? 'Empresa' : 'Usuario'; ?></p>
                                 <p class="text-muted font-size-sm"><?php echo htmlspecialchars($userData['direccion']); ?></p>
-                                <button class="btn btn-outline-primary">Revisar Chat</button>
+                                <button class="btn btn-outline-primary" onclick="location.href='Notificaciones.php'">Revisar Chat</button>
+
+
                             </div>
                         </div>
                         <hr class="my-4">

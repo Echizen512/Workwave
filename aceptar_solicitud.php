@@ -26,7 +26,7 @@ if (isset($_GET['proyecto_id']) && isset($_GET['usuario_id'])) {
             $stmt_insert = $conn->prepare($sql_insert);
             $stmt_insert->bind_param("issssi", $proyecto_id, $interesado['nombre_interesado'], $interesado['email_interesado'], $interesado['telefono_interesado'], $interesado['rol_solicitante'], $usuario_id);
             $stmt_insert->execute();
-            
+
             header("Location: Solicitudes.php?success=1");
             exit();
         } else {

@@ -97,7 +97,8 @@ $conn->close();
                                     </p>
                                     <p class="text-muted font-size-sm">
                                         <?php echo htmlspecialchars($userData['direccion']); ?></p>
-                                    <button class="btn btn-outline-primary">Mensaje</button>
+                                        <button class="btn btn-outline-primary" onclick="location.href='Chat.php?user_id=<?php echo $userId; ?>&role=<?php echo $userRole; ?>'">Mensaje</button>
+
                                 </div>
                             </div>
                             <hr class="my-4">
