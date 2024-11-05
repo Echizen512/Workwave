@@ -4,7 +4,7 @@ include "./Config/conexion.php";
 
 // Verifica si las variables de sesión están definidas
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
-    header("location: ./login.php");
+    header("location: ./login.html");
     exit();
 }
 
@@ -54,7 +54,7 @@ $row = mysqli_fetch_assoc($sql);
     <div class="wrapper">
         <section class="chat-area">
             <header>
-                <a href="users.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+                <a href="notificaciones.php" class="back-icon"><i class="fas fa-arrow-left"></i></a>
                 <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="Profile Image">
                 <div class="details">
                     <span><?php echo htmlspecialchars($row['nombre'] ?? $row['nombre_empresa']); ?></span>

@@ -4,7 +4,7 @@ include "../Config/conexion.php";
 
 // Verifica si las variables de sesión están definidas
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
-    header("location: ./login.php");
+    header("location: ./login.html");
     exit();
 }
 
