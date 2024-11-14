@@ -39,6 +39,14 @@ if ($result->num_rows > 0) {
 }
 
 $stmt->close();
+
+$paypalSql = "SELECT cuenta_paypal FROM usuarios_paypal WHERE usuario_id = ?";
+$paypalStmt = $conn->prepare($paypalSql);
+$paypalStmt->bind_param("i", $userId);
+$paypalStmt->execute();
+$paypalResult = $paypalStmt->get_result();
+$paypalData = $paypalResult->fetch_assoc();
+
 $conn->close();
 ?>
 
@@ -66,7 +74,39 @@ $conn->close();
         .me-2 {
             margin-right: .5rem !important;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
+
 </head>
 <body>
 <br><br>
@@ -86,6 +126,7 @@ $conn->close();
                                 <p class="text-secondary mb-1"><?php echo $role === 'empresas' ? 'Empresa' : 'Usuario'; ?></p>
                                 <p class="text-muted font-size-sm"><?php echo htmlspecialchars($userData['direccion']); ?></p>
                                 <button class="btn btn-outline-primary" onclick="location.href='Notificaciones.php'">Revisar Chat</button>
+                                <button class="btn btn-outline-primary" onclick="openPaypalModal()">Cuenta PayPal</button>
 
 
                             </div>
@@ -232,5 +273,49 @@ $conn->close();
         </div>
     </div>
 </div>
+
+<?php include './Includes/Footer.php'; ?>
+
+<!-- Modal de PayPal -->
+<div id="paypalModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePaypalModal()">&times;</span>
+        <h5>Cuenta PayPal</h5>
+        <form method="post" action="update_paypal.php">
+            <div class="form-group">
+                <label for="paypal_account">Cuenta PayPal:</label>
+                <input type="email" class="form-control" id="paypal_account" name="paypal_account" value="<?php echo htmlspecialchars($paypalData['cuenta_paypal'] ?? ''); ?>" required>
+            </div>
+            <div>
+            <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
+            <button type="submit" class="btn btn-primary mt-2">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Abrir el modal
+    function openPaypalModal() {
+        document.getElementById("paypalModal").style.display = "block";
+    }
+
+    // Cerrar el modal
+    function closePaypalModal() {
+        document.getElementById("paypalModal").style.display = "none";
+    }
+
+    // Cerrar el modal si el usuario hace clic fuera de él
+    window.onclick = function(event) {
+        if (event.target == document.getElementById("paypalModal")) {
+            closePaypalModal();
+        }
+    }
+</script>
+
+</body>
+</html>
+
+
 </body>
 </html>
