@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-11-2024 a las 12:50:58
+-- Tiempo de generación: 15-11-2024 a las 15:13:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -86,7 +86,34 @@ INSERT INTO `auditoria` (`id`, `tabla`, `operacion`, `id_registro`, `usuario_id`
 (22, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-10-26 21:53:30', 'Se actualizó la empresa: Suguru Geto'),
 (23, 'interesados_proyecto', 'INSERT', 6, 1, 'freelancers', '2024-10-27 01:10:32', 'Se insertó un interesado: Satoru Gojo'),
 (24, 'Freelancers', 'UPDATE', 1, 1, 'freelancer', '2024-10-27 01:23:15', 'Se actualizó el freelancer: Satoru Gojo'),
-(25, 'Freelancers', 'UPDATE', 1, 1, 'freelancer', '2024-10-27 01:25:35', 'Se actualizó el freelancer: Satoru Gojo');
+(25, 'Freelancers', 'UPDATE', 1, 1, 'freelancer', '2024-10-27 01:25:35', 'Se actualizó el freelancer: Satoru Gojo'),
+(26, 'Proyectos', 'UPDATE', 7, NULL, 'freelancers', '2024-11-13 01:30:01', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
+(27, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-11-14 12:42:11', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(28, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-11-14 12:42:32', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(29, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-14 12:50:45', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(30, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-11-14 12:50:46', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(31, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:02:22', 'Se actualizó la empresa: Suguru Geto'),
+(32, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:03:21', 'Se actualizó la empresa: Suguru Geto'),
+(33, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:03:34', 'Se actualizó la empresa: Suguru Geto'),
+(34, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:04:00', 'Se actualizó la empresa: Suguru Geto'),
+(35, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:04:15', 'Se actualizó la empresa: Suguru Geto'),
+(36, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:33:57', 'Se actualizó la empresa: Suguru Geto'),
+(37, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:34:05', 'Se actualizó la empresa: 2222'),
+(38, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:34:54', 'Se actualizó la empresa: Suguru Geto'),
+(39, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:37:10', 'Se actualizó la empresa: Suguru Geto'),
+(40, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:37:57', 'Se actualizó la empresa: Suguru Geto'),
+(41, 'Proyectos', 'INSERT', 19, NULL, 'empresas', '2024-11-14 19:41:18', 'Se insertó un proyecto: aasda'),
+(42, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:53:44', 'Se actualizó la empresa: Suguru Geto'),
+(43, 'interesados_proyecto', 'INSERT', 7, 4, 'empresas', '2024-11-14 20:02:09', 'Se insertó un interesado: Satoru Gojo'),
+(44, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:42:34', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(45, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:42:54', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(46, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:43:04', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(47, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:44:08', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(48, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:45:50', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(49, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:46:10', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(50, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:52:14', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(51, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:52:21', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(52, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-11-15 13:52:28', 'Se actualizó el proyecto: Rediseño de Página Webs');
 
 -- --------------------------------------------------------
 
@@ -112,6 +139,30 @@ INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 (4, 'Desarrollo de APIs', 'Desarrollo de APIs', 1),
 (5, 'Integración de Sistemas', 'Integración de Sistemas', 1),
 (6, 'Diseño de UX/UI', 'Diseño de UX/UI', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `comentarios_valoraciones`
+--
+
+CREATE TABLE `comentarios_valoraciones` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `comentario_usuario_id` int(11) NOT NULL,
+  `comentario_usuario_role` varchar(50) NOT NULL,
+  `comentario` text NOT NULL,
+  `valoracion` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `comentarios_valoraciones`
+--
+
+INSERT INTO `comentarios_valoraciones` (`id`, `usuario_id`, `comentario_usuario_id`, `comentario_usuario_role`, `comentario`, `valoracion`, `fecha`) VALUES
+(1, 4, 1, 'freelancers', 'Prueba', 2, '2024-11-13 02:10:06'),
+(2, 1, 4, 'empresas', 'Bueno', 5, '2024-11-14 20:07:20');
 
 -- --------------------------------------------------------
 
@@ -185,7 +236,7 @@ CREATE TABLE `empresas` (
 --
 
 INSERT INTO `empresas` (`id`, `nombre_empresa`, `email`, `telefono`, `rif`, `direccion`, `descripcion_empresa`, `sitio_web`, `contrasena`, `Estado`, `image_url`, `doc_rif`) VALUES
-(4, 'Suguru Geto', 'gramolca@gmail.com', '041212345678', 'V-30658992', 'Kyoto', 'Agropecuaria', 'https://gramolcas.com/', '$2y$10$Bjn61VMEpe7uwd72QOYT5u5GnIxe2WK3MZVxVJC83bOkDRNHFTlXi', 1, 'https://www.hdwallpapers.in/download/suguru_geto_black_dress_hd_jujutsu_kaisen-HD.jpg', 'C:\\xampp\\htdocs\\Anderson\\Includes/../Assets/doc/2_20241021_001844_0001.png'),
+(4, 'Suguru Geto', 'gramolca@gmail.com', '04243363970', 'V-30658992', 'Tokyo', 'Agropecuaria', 'https://gramolcas.com/', '$2y$10$Bjn61VMEpe7uwd72QOYT5u5GnIxe2WK3MZVxVJC83bOkDRNHFTlXi', 1, 'https://miro.medium.com/v2/resize:fit:736/1*GHQ2nQfaZyF81STYtlmAyA.jpeg', NULL),
 (8, 'no', 'no@gmail.com', '04121234567', 'V-30658992', 'Cagua', 'sos', 'https://si.com/', '$2y$10$cd1hK5MwfoAqd49.k8WlDu0cRrrI.Fx3KGBW035A7KLFzcj8PybAC', 1, NULL, NULL),
 (9, 'Prueba', 'jmrm19722@gmail.com', '04243363970', 'V-30091390', 'El Bosque', 'Sí', 'https://gramolca.com/', '$2y$10$ShsaIzITY0VXGdOSBBTpx.J/vL6Z73z/zgqxjaqEi5yYWY2nnWTh6', 1, NULL, NULL);
 
@@ -278,7 +329,8 @@ CREATE TABLE `interesados_proyecto` (
 
 INSERT INTO `interesados_proyecto` (`id`, `nombre_interesado`, `email_interesado`, `telefono_interesado`, `id_proyecto`, `nombre_proyecto`, `creador_id`, `tipo_usuario_creador`, `usuario_id`, `rol_solicitante`) VALUES
 (5, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 8, 'Desarrollo de Software Personalizado para Cliente F', 4, 'empresas', 1, 'freelancers'),
-(6, 'Satoru Gojo', 'jmrm19722@gmail.com', '3080754', 2, 'Rediseño de Página Webs', 4, 'empresas', 1, 'freelancers');
+(6, 'Satoru Gojo', 'jmrm19722@gmail.com', '3080754', 2, 'Rediseño de Página Webs', 4, 'empresas', 1, 'freelancers'),
+(7, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 7, 'Creación de Contenido para Blog', 1, 'freelancers', 4, 'empresas');
 
 --
 -- Disparadores `interesados_proyecto`
@@ -356,17 +408,20 @@ CREATE TABLE `proyectos` (
   `fecha_fin` date DEFAULT NULL,
   `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
   `intereses` text DEFAULT NULL,
-  `Etiqueta` enum('Oferta','Servicio') DEFAULT NULL
+  `Etiqueta` enum('Oferta','Servicio') DEFAULT NULL,
+  `repositorio` varchar(255) DEFAULT NULL,
+  `terminado` enum('Sí','No') DEFAULT 'No',
+  `pago` enum('Pendiente','Pagado') DEFAULT 'Pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `proyectos`
 --
 
-INSERT INTO `proyectos` (`id`, `tipo_usuario`, `contratista_id`, `freelancer_id`, `empresa_id`, `titulo`, `descripcion`, `image_url`, `categoria_id`, `precio`, `estado`, `fecha_inicio`, `fecha_fin`, `fecha_registro`, `intereses`, `Etiqueta`) VALUES
-(2, 'empresas', NULL, NULL, 4, 'Rediseño de Página Webs', 'Rediseño completo de una página web para una empresa de moda.', 'https://pixelemos.com/wp-content/uploads/2017/06/como-crear-un-sitio-web.jpg', 1, 1500.00, 1, '2024-08-15', '2024-10-01', '2024-08-28 13:07:06', 'Diseño web, UX/UI, Desarrollo frontend', 'Oferta'),
-(7, 'freelancers', NULL, 1, NULL, 'Creación de Contenido para Blog', 'Creación de artículos y contenido de alta calidad para el blog E, con enfoque en SEO y estrategias de contenido.', 'https://i0.wp.com/res.cloudinary.com/djdesignerlab/image/upload/v1602264211/wp-uploads/SEO-Strategies-min_pn3uwz.jpg?w=1080&ssl=1', 1, 750.00, 1, '2024-08-15', '2024-10-15', '2024-08-28 13:56:21', 'Redacción de contenido, Estrategias de SEO', 'Oferta'),
-(8, 'empresas', NULL, NULL, 4, 'Desarrollo de Software Personalizado para Cliente F', 'Desarrollo de un software personalizado para la empresa cliente F, incluyendo análisis, diseño y programación.', 'https://softwarewebsas.com/public/images/blog/dev.webp', 1, 3500.00, 0, '2024-08-01', '2025-01-31', '2024-08-28 13:57:03', 'Desarrollo de software, Personalización', 'Servicio');
+INSERT INTO `proyectos` (`id`, `tipo_usuario`, `contratista_id`, `freelancer_id`, `empresa_id`, `titulo`, `descripcion`, `image_url`, `categoria_id`, `precio`, `estado`, `fecha_inicio`, `fecha_fin`, `fecha_registro`, `intereses`, `Etiqueta`, `repositorio`, `terminado`, `pago`) VALUES
+(2, 'empresas', NULL, NULL, 4, 'Rediseño de Página Webs', 'Rediseño completo de una página web para una empresa de moda.', 'https://pixelemos.com/wp-content/uploads/2017/06/como-crear-un-sitio-web.jpg', 1, 1500.00, 1, '2024-08-15', '2024-10-01', '2024-08-28 13:07:06', 'Diseño web, UX/UI, Desarrollo frontend', 'Oferta', 'https://github.com', 'No', 'Pendiente'),
+(7, 'freelancers', NULL, 1, NULL, 'Creación de Contenido para Blog', 'Creación de artículos y contenido de alta calidad para el blog E, con enfoque en SEO y estrategias de contenido.', 'https://i0.wp.com/res.cloudinary.com/djdesignerlab/image/upload/v1602264211/wp-uploads/SEO-Strategies-min_pn3uwz.jpg?w=1080&ssl=1', 1, 750.00, 1, '2024-08-15', '2024-10-15', '2024-08-28 13:56:21', 'Redacción de contenido, Estrategias de SEO', 'Oferta', NULL, 'No', 'Pagado'),
+(8, 'empresas', NULL, NULL, 4, 'Desarrollo de Software Personalizado para Cliente F', 'Desarrollo de un software personalizado para la empresa cliente F, incluyendo análisis, diseño y programación.', 'https://softwarewebsas.com/public/images/blog/dev.webp', 1, 3500.00, 1, '2024-08-01', '2025-01-31', '2024-08-28 13:57:03', 'Desarrollo de software, Personalización', 'Servicio', 'https://github.com', 'Sí', 'Pendiente');
 
 --
 -- Disparadores `proyectos`
@@ -408,7 +463,29 @@ CREATE TABLE `usuarios_aceptados` (
 --
 
 INSERT INTO `usuarios_aceptados` (`id`, `proyecto_id`, `nombre_interesado`, `email_interesado`, `telefono_interesado`, `rol_solicitante`, `fecha_aceptacion`, `usuario_id`) VALUES
-(3, 8, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 'freelancers', '2024-09-22 19:59:48', 1);
+(3, 8, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 'freelancers', '2024-09-22 19:59:48', 1),
+(4, 2, 'Satoru Gojo', 'jmrm19722@gmail.com', '3080754', 'freelancers', '2024-11-14 12:42:32', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_paypal`
+--
+
+CREATE TABLE `usuarios_paypal` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `rol` enum('contratistas','freelancers','empresas') NOT NULL,
+  `cuenta_paypal` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios_paypal`
+--
+
+INSERT INTO `usuarios_paypal` (`id`, `usuario_id`, `rol`, `cuenta_paypal`) VALUES
+(1, 1, 'freelancers', 'sb-q7bm833432292@business.example.com'),
+(2, 4, 'empresas', 'sb-xzgfq33436270@personal.example.com');
 
 --
 -- Índices para tablas volcadas
@@ -430,6 +507,12 @@ ALTER TABLE `auditoria`
 -- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `comentarios_valoraciones`
+--
+ALTER TABLE `comentarios_valoraciones`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -484,6 +567,12 @@ ALTER TABLE `usuarios_aceptados`
   ADD KEY `proyecto_id` (`proyecto_id`);
 
 --
+-- Indices de la tabla `usuarios_paypal`
+--
+ALTER TABLE `usuarios_paypal`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -497,13 +586,19 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `comentarios_valoraciones`
+--
+ALTER TABLE `comentarios_valoraciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `contratistas`
@@ -527,7 +622,7 @@ ALTER TABLE `freelancers`
 -- AUTO_INCREMENT de la tabla `interesados_proyecto`
 --
 ALTER TABLE `interesados_proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `messages`
@@ -539,13 +634,19 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_aceptados`
 --
 ALTER TABLE `usuarios_aceptados`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios_paypal`
+--
+ALTER TABLE `usuarios_paypal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

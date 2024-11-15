@@ -88,15 +88,21 @@
                                 <a href="./Notificaciones.php" class="dropdown-item">
                                     <i class="fas fa-bell"></i> Notificaciones
                                 </a>
+                                <!-- Nuevo item "Trabajos Activos" -->
+                                <a href="./Prueba.php" class="dropdown-item">
+                                    <i class="fas fa-briefcase"></i> Trabajos Activos
+                                </a>
                                 <a href="logout.php" class="dropdown-item">
                                     <i class="fas fa-sign-out-alt mr-1"></i> Salir
                                 </a>
                             </div>
                         </div>
+
                     </div>
                 </div>
         </div>
-        </nav>
+    </div>
+    </nav>
     </div>
     </div>
 </body>

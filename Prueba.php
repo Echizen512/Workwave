@@ -15,21 +15,28 @@ $role = $_SESSION['role'];
 // Consulta para obtener los proyectos en los que el usuario ha sido aceptado
 $sql = "
     SELECT 
+        proyectos.id AS proyecto_id, 
         proyectos.titulo AS titulo_proyecto, 
-        usuarios_aceptados.nombre_interesado, 
-        usuarios_aceptados.email_interesado, 
-        usuarios_aceptados.telefono_interesado, 
-        usuarios_aceptados.fecha_aceptacion 
+        proyectos.repositorio AS repositorio, 
+        proyectos.terminado, 
+        proyectos.tipo_usuario, 
+        proyectos.contratista_id, 
+        proyectos.freelancer_id, 
+        proyectos.empresa_id,
+        CASE
+            WHEN proyectos.tipo_usuario = 'contratistas' THEN proyectos.contratista_id
+            WHEN proyectos.tipo_usuario = 'freelancers' THEN proyectos.freelancer_id
+            WHEN proyectos.tipo_usuario = 'empresas' THEN proyectos.empresa_id
+        END AS propietario_id,
+        CASE
+            WHEN proyectos.tipo_usuario = 'contratistas' THEN 'contratistas'
+            WHEN proyectos.tipo_usuario = 'freelancers' THEN 'freelancers'
+            WHEN proyectos.tipo_usuario = 'empresas' THEN 'empresas'
+        END AS rol_propietario
     FROM 
-        usuarios_aceptados 
-    INNER JOIN 
-        proyectos 
-    ON 
-        usuarios_aceptados.proyecto_id = proyectos.id 
+        proyectos
     WHERE 
-        usuarios_aceptados.usuario_id = ? 
-    AND 
-        usuarios_aceptados.rol_solicitante = ?
+        proyectos.id IN (SELECT proyecto_id FROM usuarios_aceptados WHERE usuario_id = ? AND rol_solicitante = ?)
 ";
 
 $stmt = $conn->prepare($sql);
@@ -46,6 +53,7 @@ $result = $stmt->get_result();
     <title>Proyectos Aceptados</title>
     <link href="./Assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- FontAwesome -->
     <style>
         .card {
             margin-bottom: 1rem;
@@ -58,17 +66,66 @@ $result = $stmt->get_result();
     <?php include './Includes/Header.php'; ?>
 
     <div class="container mt-5">
-        <h2>Proyectos en los que participas</h2>
+        <h2>Proyectos en los que Participas</h2>
         <?php if ($result->num_rows > 0): ?>
             <div class="list-group">
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <div class="card">
                         <div class="card-body">
                             <h5>Proyecto: <?php echo htmlspecialchars($row['titulo_proyecto']); ?></h5>
-                            <p><strong>Interesado:</strong> <?php echo htmlspecialchars($row['nombre_interesado']); ?></p>
-                            <p><strong>Email:</strong> <?php echo htmlspecialchars($row['email_interesado']); ?></p>
-                            <p><strong>Teléfono:</strong> <?php echo htmlspecialchars($row['telefono_interesado']); ?></p>
-                            <p><strong>Fecha de Aceptación:</strong> <?php echo date('d-m-Y', strtotime($row['fecha_aceptacion'])); ?></p>
+                            <p><strong>Repositorio:</strong> <?php echo htmlspecialchars($row['repositorio']); ?></p>
+                            <p><strong>Estado:</strong> <?php echo ($row['terminado'] == 'Sí') ? 'Terminado' : 'En Proceso'; ?></p>
+
+                            <!-- Botón para Ver Perfil del Dueño del Proyecto -->
+                            <a href="ver_perfil.php?usuario_id=<?php echo htmlspecialchars($row['propietario_id']); ?>&rol_solicitante=<?php echo urlencode($row['rol_propietario']); ?>" class="btn btn-info" style="margin: 10px; margin-left: 180px;">
+                                <i class="fas fa-user"></i> Ver Perfil
+                            </a>
+
+                            <!-- Botón para Ir al Chat del Dueño del Proyecto -->
+                            <a href="Chat.php?user_id=<?php echo htmlspecialchars($row['propietario_id']); ?>&role=<?php echo htmlspecialchars($row['rol_propietario']); ?>" class="btn btn-primary" style="margin: 10px;">
+                                <i class="fas fa-comments"></i> Ir al Chat
+                            </a>
+
+                            <!-- Botón para Marcar Proyecto como Terminado -->
+                            <?php if ($row['terminado'] == 'No'): ?>
+                                <form action="marcar_terminado.php" method="post" style="display:inline;">
+                                    <input type="hidden" name="proyecto_id" value="<?php echo $row['proyecto_id']; ?>">
+                                    <button type="submit" class="btn btn-success" style="margin: 10px;">
+                                        <i class="fas fa-check-circle"></i> Marcar como Terminado
+                                    </button>
+                                </form>
+                            <?php endif; ?>
+
+                            <!-- Botón para Abrir Modal y Agregar URL del Repositorio -->
+                            <button type="button" class="btn btn-secondary text-white" data-toggle="modal" data-target="#repositorioModal<?php echo $row['proyecto_id']; ?>" style="margin: 10px;">
+                                <i class="fas fa-link"></i> Ingresar Repositorio
+                            </button>
+
+                            <!-- Modal para Ingresar Repositorio -->
+                            <div class="modal fade" id="repositorioModal<?php echo $row['proyecto_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="repositorioModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="repositorioModalLabel">Agregar URL del Repositorio</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="actualizar_repositorio.php" method="post">
+                                                <input type="hidden" name="proyecto_id" value="<?php echo $row['proyecto_id']; ?>">
+                                                <div class="form-group">
+                                                    <label for="repositorio">URL del Repositorio:</label>
+                                                    <input type="url" name="repositorio" class="form-control" required>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">
+                                                    <i class="fas fa-save"></i> Guardar
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 <?php endwhile; ?>
