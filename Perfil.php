@@ -165,7 +165,7 @@ $conn->close();
                                     <h6 class="mb-0">Email</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="email" value="<?php echo htmlspecialchars($userData['email']); ?>">
+                                    <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($userData['email']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -173,7 +173,7 @@ $conn->close();
                                     <h6 class="mb-0">Teléfono</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" name="telefono" value="<?php echo htmlspecialchars($userData['telefono']); ?>">
+                                    <input type="number" class="form-control" name="telefono" value="<?php echo htmlspecialchars($userData['telefono']); ?>">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -313,9 +313,101 @@ $conn->close();
     }
 </script>
 
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Validar nombre y dirección (solo letras y espacios)
+    function validarTexto(texto) {
+        return /^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/.test(texto);
+    }
+
+    // Validar teléfono (exactamente 11 dígitos)
+    function validarTelefono(telefono) {
+        return /^[0-9]{11}$/.test(telefono);
+    }
+
+    // Validar URL
+    function validarURL(url) {
+        try {
+            new URL(url);
+            return true;
+        } catch (_) {
+            return false;
+        }
+    }
+
+    document.querySelector("form").addEventListener("submit", function(e) {
+        const nombre = document.querySelector("input[name='nombre']").value;
+        const direccion = document.querySelector("input[name='direccion']").value;
+        const telefono = document.querySelector("input[name='telefono']").value;
+        const imageUrl = document.querySelector("input[name='image_url']").value;
+        const sitioWeb = document.querySelector("input[name='sitio_web']")?.value;
+        const portafolio = document.querySelector("input[name='portafolio']")?.value;
+
+        if (!validarTexto(nombre)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en el Nombre',
+                text: 'El nombre solo puede contener letras y espacios.'
+            });
+            e.preventDefault();
+            return;
+        }
+
+        if (!validarTexto(direccion)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en la Dirección',
+                text: 'La dirección solo puede contener letras y espacios.'
+            });
+            e.preventDefault();
+            return;
+        }
+
+        if (!validarTelefono(telefono)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en el Teléfono',
+                text: 'El teléfono debe contener exactamente 11 dígitos.'
+            });
+            e.preventDefault();
+            return;
+        }
+
+        if (imageUrl && !validarURL(imageUrl)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en la URL de la Imagen',
+                text: 'La URL de la imagen no es válida.'
+            });
+            e.preventDefault();
+            return;
+        }
+
+        if (sitioWeb && !validarURL(sitioWeb)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en la URL del Sitio Web',
+                text: 'La URL del sitio web no es válida.'
+            });
+            e.preventDefault();
+            return;
+        }
+
+        if (portafolio && !validarURL(portafolio)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error en la URL del Portafolio',
+                text: 'La URL del portafolio no es válida.'
+            });
+            e.preventDefault();
+            return;
+        }
+    });
+</script>
+
+
 
 
 </body>
 </html>
+

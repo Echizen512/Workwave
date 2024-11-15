@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <form id="interesadoForm" method="post" action="">
                     <div class="form-group">
                         <label for="nombre_interesado">Nombre del Interesado</label>
-                        <input type="text" class="form-control" id="nombre_interesado" name="nombre_interesado" required>
+                        <input type="text" class="form-control" id="nombre_interesado" name="nombre_interesado" pattern="[A-Za-z\s]+" title="El nombre solo puede contener letras y espacios" required>
                     </div>
                     <div class="form-group">
                         <label for="email_interesado">Correo Electrónico</label>
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="form-group">
                         <label for="telefono_interesado">Teléfono</label>
-                        <input type="text" class="form-control" id="telefono_interesado" name="telefono_interesado">
+                        <input type="text" class="form-control" id="telefono_interesado" name="telefono_interesado" maxlength="11" pattern="\d{11}" title="El teléfono debe tener exactamente 11 dígitos numéricos" required>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Agregar Interesado</button>
@@ -116,6 +116,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             var formData = new FormData(this);
 
+            // Validar el nombre del interesado (solo letras y espacios)
+            const nombreInteresado = document.getElementById('nombre_interesado').value;
+            const nombreRegex = /^[A-Za-z\s]+$/;
+            if (!nombreRegex.test(nombreInteresado)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El nombre solo puede contener letras y espacios.',
+                });
+                return;
+            }
+
+            // Validar el correo electrónico (formato de correo válido)
+            const emailInteresado = document.getElementById('email_interesado').value;
+            if (!emailInteresado.includes('@')) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El correo electrónico debe ser válido.',
+                });
+                return;
+            }
+
+            // Validar el teléfono (exactamente 11 dígitos numéricos)
+            const telefonoInteresado = document.getElementById('telefono_interesado').value;
+            const telefonoRegex = /^\d{11}$/;
+            if (!telefonoRegex.test(telefonoInteresado)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'El teléfono debe tener exactamente 11 dígitos numéricos.',
+                });
+                return;
+            }
+
+            // Enviar los datos si pasa todas las validaciones
             fetch('', {
                 method: 'POST',
                 body: formData

@@ -139,7 +139,7 @@ $conn->close();
                             });
                         },
                         onCancel: function(data) {
-                            window.location.href = "http://localhost/Anderson/cancelar_pago.php";
+                            window.location.href = "http://localhost/Anderson/Inicio.php";
                         }
                     }).render('#paypal-button-container');
                 </script>

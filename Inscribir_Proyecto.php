@@ -77,7 +77,8 @@ while ($row = $result->fetch_assoc()) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -91,20 +92,24 @@ while ($row = $result->fetch_assoc()) {
             background-attachment: fixed;
             background-repeat: no-repeat;
         }
+
         .card {
-            background-color: rgba(255, 255, 255, 0.9); 
+            background-color: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
         }
+
         .card-header {
             background-color: #007bff;
             color: white;
         }
+
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-5">
         <div class="card">
@@ -112,14 +117,18 @@ while ($row = $result->fetch_assoc()) {
                 <h2 style="color: white;">Agregar Proyecto</h2>
             </div>
             <div class="card-body">
-                <form action="" method="post" enctype="multipart/form-data">
+                <form id="proyectoForm" action="" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="tipo_usuario" value="<?php echo htmlspecialchars($_SESSION['role']); ?>">
+                    <!-- Aquí insertamos el id según el tipo de usuario -->
                     <?php if ($_SESSION['role'] === 'contratistas'): ?>
-                        <input type="hidden" name="contratista_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
+                        <input type="hidden" name="contratista_id"
+                            value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
                     <?php elseif ($_SESSION['role'] === 'freelancers'): ?>
-                        <input type="hidden" name="freelancer_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
+                        <input type="hidden" name="freelancer_id"
+                            value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
                     <?php elseif ($_SESSION['role'] === 'empresas'): ?>
-                        <input type="hidden" name="empresa_id" value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
+                        <input type="hidden" name="empresa_id"
+                            value="<?php echo htmlspecialchars($_SESSION['user_id']); ?>">
                     <?php endif; ?>
 
                     <div class="form-group">
@@ -132,32 +141,36 @@ while ($row = $result->fetch_assoc()) {
                     </div>
                     <div class="form-group">
                         <label for="image_url">Imagen URL:</label>
-                        <input type="text" class="form-control" id="image_url" name="image_url">
+                        <input type="text" class="form-control" id="image_url" name="image_url" required>
                     </div>
                     <div class="form-group">
                         <label for="categoria_id">Categoría:</label>
                         <select class="form-control" id="categoria_id" name="categoria_id" required>
                             <option value="">Selecciona una categoría</option>
                             <?php foreach ($categorias as $categoria): ?>
-                                <option value="<?php echo htmlspecialchars($categoria['id']); ?>"><?php echo htmlspecialchars($categoria['nombre']); ?></option>
+                                <option value="<?php echo htmlspecialchars($categoria['id']); ?>">
+                                    <?php echo htmlspecialchars($categoria['nombre']); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="precio">Precio:</label>
-                        <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
+                        <input type="number" class="form-control" id="precio" name="precio" step="0.01" min="1"
+                            max="9999" required>
                     </div>
                     <div class="form-group">
                         <label for="fecha_inicio">Fecha de Inicio:</label>
-                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required min="<?php echo date('Y-m-d'); ?>">
+                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required
+                            min="<?php echo date('Y-m-d'); ?>">
                     </div>
                     <div class="form-group">
                         <label for="fecha_fin">Fecha de Fin:</label>
-                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" min="<?php echo date('Y-m-d'); ?>">
+                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin"
+                            min="<?php echo date('Y-m-d'); ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="intereses">Intereses:</label>
-                        <input type="text" class="form-control" id="intereses" name="intereses">
+                        <input type="text" class="form-control" id="intereses" name="intereses" required>
                     </div>
                     <div class="form-group">
                         <label for="etiqueta">Etiqueta:</label>
@@ -177,28 +190,64 @@ while ($row = $result->fetch_assoc()) {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.0/sweetalert2.all.min.js"></script>
     <script>
-        <?php if ($success): ?>
-            Swal.fire({
-                title: 'Éxito!',
-                text: 'El proyecto ha sido agregado exitosamente.',
-                icon: 'success',
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = 'Inicio.php';
-                }
-            });
-        <?php elseif ($error_message): ?>
-            Swal.fire({
-                title: 'Error!',
-                text: '<?php echo addslashes($error_message); ?>',
-                icon: 'error',
-                confirmButtonText: 'OK'
-            });
-        <?php endif; ?>
+        document.getElementById('proyectoForm').addEventListener('submit', function (event) {
+            // Validar Título y Descripción: solo letras y espacios
+            const titulo = document.getElementById('titulo').value;
+            const descripcion = document.getElementById('descripcion').value;
+            const intereses = document.getElementById('intereses').value;
+
+            const regex = /^[a-zA-Z\s]+$/;
+
+            if (!regex.test(titulo)) {
+                Swal.fire('Error', 'El título solo puede contener letras y espacios.', 'error');
+                event.preventDefault();
+                return;
+            }
+
+            if (!regex.test(descripcion)) {
+                Swal.fire('Error', 'La descripción solo puede contener letras y espacios.', 'error');
+                event.preventDefault();
+                return;
+            }
+
+            if (!regex.test(intereses)) {
+                Swal.fire('Error', 'Los intereses solo pueden contener letras y espacios.', 'error');
+                event.preventDefault();
+                return;
+            }
+
+            // Validar Imagen URL
+            const image_url = document.getElementById('image_url').value;
+            const urlRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*$/;
+
+            if (image_url && !urlRegex.test(image_url)) {
+                Swal.fire('Error', 'La URL de la imagen no es válida.', 'error');
+                event.preventDefault();
+                return;
+            }
+
+            // Validar Precio (Solo números)
+            const precio = document.getElementById('precio').value;
+            if (isNaN(precio) || precio <= 0) {
+                Swal.fire('Error', 'El precio debe ser un número positivo.', 'error');
+                event.preventDefault();
+                return;
+            }
+
+            // Validar las Fechas
+            const fecha_inicio = new Date(document.getElementById('fecha_inicio').value);
+            const fecha_fin = new Date(document.getElementById('fecha_fin').value);
+
+            if (fecha_fin <= fecha_inicio) {
+                Swal.fire('Error', 'La fecha de fin debe ser al menos un día después de la fecha de inicio.', 'error');
+                event.preventDefault();
+                return;
+            }
+        });
     </script>
 
-<?php include './Includes/Footer.php'; ?>
+    <?php include './Includes/Footer.php'; ?>
 
 </body>
+
 </html>

@@ -76,6 +76,9 @@
                                 <a href="./Perfil.php" class="dropdown-item">
                                     <i class="fas fa-user"></i> Perfil
                                 </a>
+                                <a href="./Pagos.php" class="dropdown-item">
+                                    <i class="fas fa-credit-card"></i> Pagos
+                                </a>
                                 <a href="./Solicitudes.php" class="dropdown-item">
                                     <i class="fas fa-file-alt"></i> Solicitudes
                                 </a>
@@ -86,7 +89,7 @@
                                     <i class="fas fa-bell"></i> Notificaciones
                                 </a>
                                 <a href="logout.php" class="dropdown-item">
-                                    <i class="fas fa-sign-out-alt mr-2"></i> Salir
+                                    <i class="fas fa-sign-out-alt mr-1"></i> Salir
                                 </a>
                             </div>
                         </div>

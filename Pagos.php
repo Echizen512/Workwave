@@ -74,7 +74,7 @@ $result = $stmt->get_result();
                         <tr>
                             <td><?php echo htmlspecialchars($row['titulo']); ?></td>
                             <td><?php echo htmlspecialchars($row['descripcion']); ?></td>
-                            <td><?php echo htmlspecialchars($row['precio']); ?></td>
+                            <td><?php echo htmlspecialchars($row['precio'].'$'); ?></td>
                             <td><?php echo htmlspecialchars($row['repositorio']); ?></td>
                             <td><?php echo htmlspecialchars($row['terminado']); ?></td>
                             <td><?php echo htmlspecialchars($row['pago']); ?></td>
@@ -97,6 +97,8 @@ $result = $stmt->get_result();
             <div class="alert alert-info">No tienes proyectos publicados.</div>
         <?php endif; ?>
     </div>
+
+    <?php include './Includes/Footer.php'; ?>
 
     <?php
     $stmt->close();
