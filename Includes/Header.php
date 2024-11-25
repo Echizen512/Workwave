@@ -64,10 +64,13 @@
                             <div class="dropdown-menu border-0 rounded-0 m-0">
                                 <a href="Proyectos.php" class="dropdown-item"><i class="fas fa-list-ul mr-2"></i>Listado
                                     de Proyectos</a>
+                                <a href="Membresias.php" class="dropdown-item"><i
+                                        class="fas fa-list-ul mr-2"></i>Listado de Membresías</a>
                                 <a href="Inscribir_Proyecto.php" class="dropdown-item"><i
                                         class="fas fa-pen-square mr-2"></i>Inscripción</a>
                             </div>
                         </div>
+
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 <i class="fas fa-user-circle mr-2"></i>Usuario

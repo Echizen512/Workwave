@@ -62,6 +62,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
+$userId = $_SESSION['user_id'];  
+$role = $_SESSION['role'];
+$table = "";
+$table = "";
+
+if ($role === 'contratistas') {
+    $table = "contratistas";
+} elseif ($role === 'empresas') {
+    $table = "empresas";
+} elseif ($role === 'freelancers') {
+    $table = "freelancers"; 
+} else {
+    die("Role not recognized");
+}
+
+// Preparar y ejecutar la consulta
+$sql = "SELECT * FROM $table WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $userData = $result->fetch_assoc();
+} else {
+    echo "No user found.";
+    exit();
+}
+
+$membershipType = $userData['membership_type'];
+$membership_start_date = $userData['membership_start_date'];
+$membership_end_date = $userData['membership_end_date'];
 
 $sql = "SELECT id, nombre FROM categorias WHERE estado = '1'";
 $result = $conn->query($sql);
@@ -245,6 +277,9 @@ while ($row = $result->fetch_assoc()) {
             }
         });
     </script>
+
+
+
 
     <?php include './Includes/Footer.php'; ?>
 
