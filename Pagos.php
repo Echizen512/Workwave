@@ -79,14 +79,27 @@ $result = $stmt->get_result();
                             <td><?php echo htmlspecialchars($row['terminado']); ?></td>
                             <td><?php echo htmlspecialchars($row['pago']); ?></td>
                             <td>
+                                <?php if ($row['terminado'] != 'Sí'): ?>
+                                    <!-- Formulario para Marcar Proyecto como Terminado -->
+                                    <form action="marcar_terminado.php" method="POST">
+                                        <input type="hidden" name="proyecto_id" value="<?php echo $row['id']; ?>">
+                                        <button type="submit" class="btn btn-success btn-sm" style="margin: 10px;">
+    <i class="fas fa-check-circle"></i> Marcar como Terminado
+</button>
+
+                                    </form>
+                                <?php else: ?>
+                                    <button class="btn btn-success" disabled>Terminado</button>
+                                <?php endif; ?>
+
                                 <?php if ($row['pago'] == 'Pendiente'): ?>
-                                    <form action="procesar_pago.php" method="POST">
+                                    <form action="procesar_pago.php" method="POST" style="margin-top: 10px;">
                                         <input type="hidden" name="proyecto_id" value="<?php echo $row['id']; ?>">
                                         <input type="hidden" name="monto" value="<?php echo $row['precio']; ?>">
                                         <button type="submit" class="btn btn-primary">Pagar</button>
                                     </form>
                                 <?php else: ?>
-                                    <button class="btn btn-success" disabled>Pagado</button>
+                                    <button class="btn btn-success" style="margin: 10px;" disabled>Pagado</button>
                                 <?php endif; ?>
                             </td>
                         </tr>

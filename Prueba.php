@@ -86,16 +86,6 @@ $result = $stmt->get_result();
                                 <i class="fas fa-comments"></i> Ir al Chat
                             </a>
 
-                            <!-- Botón para Marcar Proyecto como Terminado -->
-                            <?php if ($row['terminado'] == 'No'): ?>
-                                <form action="marcar_terminado.php" method="post" style="display:inline;">
-                                    <input type="hidden" name="proyecto_id" value="<?php echo $row['proyecto_id']; ?>">
-                                    <button type="submit" class="btn btn-success" style="margin: 10px;">
-                                        <i class="fas fa-check-circle"></i> Marcar como Terminado
-                                    </button>
-                                </form>
-                            <?php endif; ?>
-
                             <!-- Botón para Abrir Modal y Agregar URL del Repositorio -->
                             <button type="button" class="btn btn-secondary text-white" data-toggle="modal" data-target="#repositorioModal<?php echo $row['proyecto_id']; ?>" style="margin: 10px;">
                                 <i class="fas fa-link"></i> Ingresar Repositorio
