@@ -12,7 +12,6 @@ include './config/conexion.php';
 $userId = $_SESSION['user_id'];
 $role = $_SESSION['role'];
 
-// Consulta para obtener los proyectos en los que el usuario ha sido aceptado
 $sql = "
     SELECT 
         proyectos.id AS proyecto_id, 
