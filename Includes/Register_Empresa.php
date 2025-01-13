@@ -62,6 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,9 +73,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('../Assets/images/2312616.jpg'); /* Background image from Unsplash */
+            background-image: url('../Assets/images/2312616.jpg');
             display: flex;
             justify-content: center;
             align-items: center;
@@ -90,6 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 100%;
             max-width: 700px;
             box-sizing: border-box;
+            animation: fadeIn 0.5s ease-out;
         }
 
         h2 {
@@ -166,6 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
 </head>
+
 <body>
     <form id="registrationForm" class="form-container" action="register_empresa.php" method="post">
         <h2>Registro Empresa</h2>
@@ -264,4 +279,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

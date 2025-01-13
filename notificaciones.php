@@ -57,9 +57,44 @@ $result = $stmt->get_result();
     <link href="./Assets/css/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        /* Inserta aquí tu estilo CSS, incluyendo las animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .card {
             margin-bottom: 1rem;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 40px;
+            animation: fadeInUp 0.5s ease-out;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .button-primary {
+            width: 10%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .button-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -83,7 +118,7 @@ $result = $stmt->get_result();
                             <p>Fecha: <small><?php echo date('d-m-Y H:i:s', strtotime($row['timestamp'])); ?></small></p>
                             <!-- Se utiliza outgoing_msg_id y outgoing_role para abrir el chat -->
                             <div class="text-center">
-                                <a href="Chat.php?user_id=<?php echo htmlspecialchars($row['outgoing_msg_id']); ?>&role=<?php echo htmlspecialchars($row['outgoing_role']); ?>" class="btn btn-primary">Ir al Chat</a>
+                                <a href="Chat.php?user_id=<?php echo htmlspecialchars($row['outgoing_msg_id']); ?>&role=<?php echo htmlspecialchars($row['outgoing_role']); ?>" class="btn btn-primary button-primary" style="border-radius: 40px;">Ir al Chat</a>
                             </div>
                         </div>
                     </div>
@@ -93,6 +128,9 @@ $result = $stmt->get_result();
             <div class="alert alert-info">No tienes nuevas notificaciones.</div>
         <?php endif; ?>
     </div>
+</body>
+</html>
+
 
     <?php
     $stmt->close();

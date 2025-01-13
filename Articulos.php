@@ -2,6 +2,7 @@
 include './config/conexion.php';
 session_start();
 
+// Verificar que el usuario está autenticado
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
     header("Location: login.html");
     exit();
@@ -10,7 +11,85 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
 $user_id = $_SESSION['user_id'];
 $role = $_SESSION['role'];
 
+$proyecto_id = intval($_GET['id']);
+$nombre_proyecto = "";
+$creador_id = 0;
+$tipo_usuario_creador = '';
+
+$stmt = $conn->prepare("SELECT titulo, tipo_usuario, contratista_id, freelancer_id, empresa_id FROM proyectos WHERE id = ?");
+$stmt->bind_param('i', $proyecto_id);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($row = $result->fetch_assoc()) {
+    $nombre_proyecto = $row['titulo'];
+    $tipo_usuario_creador = $row['tipo_usuario'];
+    $creador_id = match($tipo_usuario_creador) {
+        'contratista' => $row['contratista_id'],
+        'freelancer' => $row['freelancer_id'],
+        'empresa' => $row['empresa_id'],
+        default => 0,
+    };
+}
+$stmt->close();
+
+// Identificar la tabla de origen según el rol
+$table = match ($role) {
+    'contratistas' => 'contratistas',
+    'empresas' => 'empresas',
+    'freelancers' => 'freelancers',
+    default => throw new Exception('Role not recognized'),
+};
+
+// Obtener la información del usuario logueado
+$sql = "SELECT * FROM $table WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$userData = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+
+// Validar el envío del formulario
+$message = '';
+$message_type = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['proyecto_id'])) {
+    $proyecto_id = intval($_POST['proyecto_id']);
+    
+    // Verificar si ya está registrado como interesado
+    $sql_check = "SELECT id FROM interesados_proyecto WHERE id_proyecto = ? AND usuario_id = ?";
+    $stmt_check = $conn->prepare($sql_check);
+    $stmt_check->bind_param("ii", $proyecto_id, $user_id);
+    $stmt_check->execute();
+    $isRegistered = $stmt_check->get_result()->num_rows > 0;
+    $stmt_check->close();
+
+    if ($isRegistered) {
+        $message = 'Ya has mostrado interés en este proyecto.';
+        $message_type = 'warning';
+    } else {
+        // Preparar los datos para el INSERT
+        $nombre_interesado = $role === 'empresas' ? $userData['nombre_empresa'] : $userData['nombre'];
+        $email_interesado = $userData['email'];
+        $telefono_interesado = $userData['telefono'];
+
+        $sql_insert = "INSERT INTO interesados_proyecto (nombre_interesado, email_interesado, telefono_interesado, id_proyecto, nombre_proyecto, creador_id, tipo_usuario_creador, usuario_id, rol_solicitante)
+                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt_insert = $conn->prepare($sql_insert);
+        $stmt_insert->bind_param("sssissisi", $nombre_interesado, $email_interesado, $telefono_interesado, $proyecto_id, $nombre_proyecto, $creador_id, $tipo_usuario_creador, $user_id, $role);
+
+        if ($stmt_insert->execute()) {
+            $message = 'Te has registrado como interesado en este proyecto.';
+            $message_type = 'success';
+        } else {
+            $message = 'No se pudo registrar tu interés. Inténtalo nuevamente.';
+            $message_type = 'error';
+        }
+        $stmt_insert->close();
+    }
+}
 ?>
+
+
+
 
 <?php include './Includes/Header.php'; ?>
 
@@ -22,9 +101,9 @@ $role = $_SESSION['role'];
             </div>
             <div class="col-md-6 text-center text-md-right">
                 <div class="d-inline-flex align-items-center">
-                    <a class="btn text-white" href="index.php"><i class="fas fa-home"></i>Inicio</a>
+                    <a class="btn text-white" href="index.php"><i class="fas fa-home me-2"></i>Inicio</a>
                     <i class="fas fa-angle-right text-white"></i>
-                    <a class="btn text-white disabled" href="#"><i class="fas fa-info-circle"></i>Detalles</a>
+                    <a class="btn text-white disabled" href="#"><i class="fas fa-info-circle me-2"></i>Detalles</a>
                 </div>
             </div>
         </div>
@@ -45,6 +124,14 @@ $result = $stmt->get_result();
 $proyecto = $result->fetch_assoc();
 $stmt->close();
 
+$sql = "SELECT * FROM tareas WHERE proyecto_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $proyecto_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$tareas = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+
 $sql_categoria = "SELECT nombre FROM Categorias WHERE id = ?";
 $stmt_categoria = $conn->prepare($sql_categoria);
 $stmt_categoria->bind_param("i", $proyecto['categoria_id']);
@@ -53,8 +140,7 @@ $result_categoria = $stmt_categoria->get_result();
 $categoria = $result_categoria->fetch_assoc()['nombre'];
 $stmt_categoria->close();
 
-$sql_recent_posts = "SELECT * FROM Proyectos ORDER BY fecha_creacion DESC LIMIT 5";
-$result_recent_posts = $conn->query($sql_recent_posts);
+
 
 ?>
 
@@ -73,14 +159,31 @@ $result_recent_posts = $conn->query($sql_recent_posts);
                     <p><?php echo htmlspecialchars($proyecto['intereses']); ?></p>
                     
                     <h2 class="mb-4"><i class="fas fa-info-circle"></i> Detalles Adicionales</h2>
-                    <p><strong><i class="fas fa-folder"></i> Categoría:</strong> <?php echo htmlspecialchars($categoria); ?></p>
-                    <p><strong><i class="fas fa-calendar-alt"></i> Inicio:</strong> <?php echo date("d/m/Y", strtotime($proyecto['fecha_inicio'])); ?></p>
-                    <p><strong><i class="fas fa-calendar-alt"></i> Fin:</strong> <?php echo date("d/m/Y", strtotime($proyecto['fecha_fin'])); ?></p>
-                    <p><strong><i class="fas fa-dollar-sign"></i> Precio:</strong> <?php echo htmlspecialchars($proyecto['precio']); ?></p>
+                    <p><i class="fas fa-folder"></i> Categoría: <?php echo htmlspecialchars($categoria); ?></p>
+                    <p><i class="fas fa-calendar-alt"></i> Inicio: <?php echo date("d/m/Y", strtotime($proyecto['fecha_inicio'])); ?></p>
+                    <p><i class="fas fa-calendar-alt"></i> Fin: <?php echo date("d/m/Y", strtotime($proyecto['fecha_fin'])); ?></p>
+                    <p><i class="fas fa-dollar-sign"></i> Precio: <?php echo htmlspecialchars($proyecto['precio']); ?></p>
+                </div>
+
+                <h2 class="mb-4"><i class="fas fa-list"></i> Tareas</h2>
+                <div>
+                    <?php foreach ($tareas as $tarea): ?>
+                        <div class="mb-3">
+                            <ul>
+                                <li><?php echo htmlspecialchars($tarea['descripcion']); ?></li>
+                            </ul>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
                 <div class="mb-5 text-center">
-                    <a href="Interesados.php?id=<?php echo htmlspecialchars($proyecto['id']); ?>" class="btn btn-primary">Agregar Interesado</a>
-                </div>
+                <form method="POST" action="">
+    <input type="hidden" name="proyecto_id" value="<?php echo htmlspecialchars($proyecto_id); ?>">
+    <button type="submit" class="btn btn-primary" style="border-radius: 20px;">Agregar Interesado</button>
+</form>
+
+
+</div>
+
 
             </div>
 
@@ -172,5 +275,18 @@ if ($result_recent_posts === false) {
 <?php include './includes/Footer.php'; ?>
 
 </body>
+<!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<?php if (!empty($message)): ?>
+    <script>
+        Swal.fire({
+            icon: '<?php echo $message_type; ?>',
+            title: '<?php echo $message_type === "success" ? "Registro exitoso" : ($message_type === "warning" ? "Ya registrado" : "Error"); ?>',
+            text: '<?php echo $message; ?>',
+            confirmButtonText: 'OK'
+        });
+    </script>
+<?php endif; ?>
 
 </html>

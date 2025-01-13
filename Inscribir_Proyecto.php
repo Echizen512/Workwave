@@ -16,28 +16,29 @@ $error_message = '';
 
 $tipo_usuario = $role;
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $tipo_usuario = $_SESSION['role'];
     $contratista_id = $_POST['contratista_id'] ?? null;
     $freelancer_id = $_POST['freelancer_id'] ?? null;
     $empresa_id = $_POST['empresa_id'] ?? null;
     $titulo = $_POST['titulo'];
     $descripcion = $_POST['descripcion'];
-    $image_url = $_POST['image_url'] ?? null;
+    $image_url = $_POST['image_url'];
     $categoria_id = $_POST['categoria_id'];
     $precio = $_POST['precio'];
     $fecha_inicio = $_POST['fecha_inicio'];
-    $fecha_fin = $_POST['fecha_fin'] ?? null;
-    $intereses = $_POST['intereses'] ?? null;
-    $etiqueta = $_POST['etiqueta']; // Captura de la etiqueta seleccionada
+    $fecha_fin = $_POST['fecha_fin'];
+    $intereses = $_POST['intereses'];
+    $etiqueta = $_POST['etiqueta'];
+    $tareas = $_POST['tareas'] ?? [];
 
-    // Modificación de la consulta INSERT para incluir la columna Etiqueta
-    $sql = "INSERT INTO proyectos (tipo_usuario, contratista_id, freelancer_id, empresa_id, titulo, descripcion, image_url, categoria_id, precio, estado, fecha_inicio, fecha_fin, fecha_registro, intereses, Etiqueta)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, '1', ?, ?, NOW(), ?, ?)";
-
-    $stmt = $conn->prepare($sql);
-    if ($stmt === false) {
-        $error_message = "Error en la preparación de la consulta: " . $conn->error;
-    } else {
+    // Inserción del proyecto
+    $conn->begin_transaction();
+    try {
+        $sql = "INSERT INTO proyectos (tipo_usuario, contratista_id, freelancer_id, empresa_id, titulo, descripcion, image_url, categoria_id, precio, fecha_inicio, fecha_fin, intereses, etiqueta)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
         $stmt->bind_param(
             "siiissssissss",
             $tipo_usuario,
@@ -52,17 +53,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $fecha_inicio,
             $fecha_fin,
             $intereses,
-            $etiqueta // Incluyendo el parámetro Etiqueta
+            $etiqueta
         );
+        $stmt->execute();
+        $proyecto_id = $stmt->insert_id;
 
-        if ($stmt->execute()) {
-            $success = true;
-        } else {
-            $error_message = "Error al agregar el proyecto: " . $stmt->error;
+        // Inserción de las tareas
+        if (!empty($tareas)) {
+            $sqlTareas = "INSERT INTO tareas (proyecto_id, descripcion) VALUES (?, ?)";
+            $stmtTareas = $conn->prepare($sqlTareas);
+
+            foreach ($tareas as $tarea) {
+                $stmtTareas->bind_param("is", $proyecto_id, $tarea);
+                $stmtTareas->execute();
+            }
         }
+
+        $conn->commit();
+        $success = true;
+    } catch (Exception $e) {
+        $conn->rollback();
+        $error_message = "Error al agregar el proyecto y sus tareas: " . $e->getMessage();
     }
 }
-$userId = $_SESSION['user_id'];  
+$userId = $_SESSION['user_id'];
 $role = $_SESSION['role'];
 $table = "";
 $table = "";
@@ -72,7 +86,7 @@ if ($role === 'contratistas') {
 } elseif ($role === 'empresas') {
     $table = "empresas";
 } elseif ($role === 'freelancers') {
-    $table = "freelancers"; 
+    $table = "freelancers";
 } else {
     die("Role not recognized");
 }
@@ -138,6 +152,95 @@ while ($row = $result->fetch_assoc()) {
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
+            border-radius: 20px;
+        }
+
+        .btn-secondary {
+            color: white;
+            border-radius: 20px;
+        }
+
+        .btn-danger {
+            border-radius: 20px;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .card-body {
+            border-radius: 30px;
+        }
+
+        .card-header {
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        .card {
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0.5;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        body {
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .card {
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .card-header {
+            animation: bounceIn 1s ease-in-out;
+        }
+
+        .form-control {
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        .btn {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -181,7 +284,8 @@ while ($row = $result->fetch_assoc()) {
                             <option value="">Selecciona una categoría</option>
                             <?php foreach ($categorias as $categoria): ?>
                                 <option value="<?php echo htmlspecialchars($categoria['id']); ?>">
-                                    <?php echo htmlspecialchars($categoria['nombre']); ?></option>
+                                    <?php echo htmlspecialchars($categoria['nombre']); ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -212,6 +316,21 @@ while ($row = $result->fetch_assoc()) {
                             <option value="Servicio">Servicio</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="tareas">Tareas:</label>
+                        <div id="tareasContainer">
+                            <div class="tarea">
+                                <input type="text" class="form-control mb-2" name="tareas[]"
+                                    placeholder="Descripción de la tarea" required>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary" id="agregarTarea">Agregar Tarea</button>
+                            <button type="button" class="btn btn-danger" id="eliminarTarea">Eliminar Tarea</button>
+                            <small class="form-text text-muted">Mínimo 1 tarea, máximo 5.</small>
+                        </div>
+                    </div>
+
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Agregar Proyecto</button>
                     </div>
@@ -221,6 +340,32 @@ while ($row = $result->fetch_assoc()) {
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.0/sweetalert2.all.min.js"></script>
+
+    <script>
+        const tareasContainer = document.getElementById('tareasContainer');
+        const agregarTarea = document.getElementById('agregarTarea');
+        const eliminarTarea = document.getElementById('eliminarTarea');
+
+        agregarTarea.addEventListener('click', () => {
+            if (tareasContainer.children.length < 5) {
+                const tarea = document.createElement('div');
+                tarea.classList.add('tarea');
+                tarea.innerHTML = `<input type="text" class="form-control mb-2" name="tareas[]" placeholder="Descripción de la tarea" required>`;
+                tareasContainer.appendChild(tarea);
+            } else {
+                alert('No puedes agregar más de 5 tareas.');
+            }
+        });
+
+        eliminarTarea.addEventListener('click', () => {
+            if (tareasContainer.children.length > 1) {
+                tareasContainer.lastChild.remove();
+            } else {
+                alert('Debe haber al menos una tarea.');
+            }
+        });
+    </script>
+
     <script>
         document.getElementById('proyectoForm').addEventListener('submit', function (event) {
             // Validar Título y Descripción: solo letras y espacios
@@ -248,17 +393,6 @@ while ($row = $result->fetch_assoc()) {
                 return;
             }
 
-            // Validar Imagen URL
-            const image_url = document.getElementById('image_url').value;
-            const urlRegex = /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-]*)*$/;
-
-            if (image_url && !urlRegex.test(image_url)) {
-                Swal.fire('Error', 'La URL de la imagen no es válida.', 'error');
-                event.preventDefault();
-                return;
-            }
-
-            // Validar Precio (Solo números)
             const precio = document.getElementById('precio').value;
             if (isNaN(precio) || precio <= 0) {
                 Swal.fire('Error', 'El precio debe ser un número positivo.', 'error');
@@ -277,9 +411,6 @@ while ($row = $result->fetch_assoc()) {
             }
         });
     </script>
-
-
-
 
     <?php include './Includes/Footer.php'; ?>
 

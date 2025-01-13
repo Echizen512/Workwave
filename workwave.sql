@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-11-2024 a las 04:59:06
+-- Tiempo de generación: 13-01-2025 a las 05:24:08
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.0.30
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -129,7 +129,19 @@ INSERT INTO `auditoria` (`id`, `tabla`, `operacion`, `id_registro`, `usuario_id`
 (65, 'Proyectos', 'INSERT', 28, NULL, 'empresas', '2024-11-24 15:34:27', 'Se insertó un proyecto: sdadas'),
 (66, 'Proyectos', 'INSERT', 29, NULL, 'empresas', '2024-11-24 15:35:01', 'Se insertó un proyecto: Pruebasadas'),
 (67, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-24 15:42:08', 'Se actualizó la empresa: Suguru Geto'),
-(68, 'Proyectos', 'INSERT', 30, NULL, 'empresas', '2024-11-24 16:23:34', 'Se insertó un proyecto: Prueba');
+(68, 'Proyectos', 'INSERT', 30, NULL, 'empresas', '2024-11-24 16:23:34', 'Se insertó un proyecto: Prueba'),
+(69, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-01-08 20:58:09', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(70, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-01-08 20:58:10', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(71, 'Proyectos', 'INSERT', 31, NULL, 'empresas', '2025-01-08 21:32:04', 'Se insertó un proyecto: Prueba'),
+(72, 'interesados_proyecto', 'INSERT', 8, 4, '0', '2025-01-09 20:20:19', 'Se insertó un interesado: Suguru Geto'),
+(73, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-01-11 21:11:26', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(74, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-01-13 03:39:05', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(75, 'Proyectos', 'UPDATE', 7, NULL, 'freelancers', '2025-01-13 03:39:37', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
+(76, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2025-01-13 03:40:18', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(77, 'Proyectos', 'UPDATE', 31, NULL, 'empresas', '2025-01-13 03:42:01', 'Se actualizó el proyecto: Prueba'),
+(78, 'Proyectos', 'UPDATE', 31, NULL, 'empresas', '2025-01-13 03:46:07', 'Se actualizó el proyecto: Creación de una dApp'),
+(79, 'Proyectos', 'UPDATE', 31, NULL, 'empresas', '2025-01-13 03:47:10', 'Se actualizó el proyecto: Creación de una dApp'),
+(80, 'interesados_proyecto', 'INSERT', 9, 1, '0', '2025-01-13 03:59:40', 'Se insertó un interesado: Satoru Gojo');
 
 -- --------------------------------------------------------
 
@@ -355,7 +367,9 @@ CREATE TABLE `interesados_proyecto` (
 INSERT INTO `interesados_proyecto` (`id`, `nombre_interesado`, `email_interesado`, `telefono_interesado`, `id_proyecto`, `nombre_proyecto`, `creador_id`, `tipo_usuario_creador`, `usuario_id`, `rol_solicitante`) VALUES
 (5, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 8, 'Desarrollo de Software Personalizado para Cliente F', 4, 'empresas', 1, 'freelancers'),
 (6, 'Satoru Gojo', 'jmrm19722@gmail.com', '3080754', 2, 'Rediseño de Página Webs', 4, 'empresas', 1, 'freelancers'),
-(7, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 7, 'Creación de Contenido para Blog', 1, 'freelancers', 4, 'empresas');
+(7, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 7, 'Creación de Contenido para Blog', 1, 'freelancers', 4, 'empresas'),
+(8, 'Suguru Geto', 'gramolca@gmail.com', '04243363970', 31, 'Prueba', 0, '', 4, '0'),
+(9, 'Satoru Gojo', 'eloy@gmail.com', '04128849077', 31, 'Creación de una dApp', 0, '', 1, '0');
 
 --
 -- Disparadores `interesados_proyecto`
@@ -470,9 +484,10 @@ CREATE TABLE `proyectos` (
 --
 
 INSERT INTO `proyectos` (`id`, `tipo_usuario`, `contratista_id`, `freelancer_id`, `empresa_id`, `titulo`, `descripcion`, `image_url`, `categoria_id`, `precio`, `estado`, `fecha_inicio`, `fecha_fin`, `fecha_registro`, `intereses`, `Etiqueta`, `repositorio`, `terminado`, `pago`) VALUES
-(2, 'empresas', NULL, NULL, 4, 'Rediseño de Página Webs', 'Rediseño completo de una página web para una empresa de moda.', 'https://pixelemos.com/wp-content/uploads/2017/06/como-crear-un-sitio-web.jpg', 1, 1500.00, 1, '2024-08-15', '2024-10-01', '2024-08-28 13:07:06', 'Diseño web, UX/UI, Desarrollo frontend', 'Oferta', 'https://github.com', 'No', 'Pendiente'),
-(7, 'freelancers', NULL, 1, NULL, 'Creación de Contenido para Blog', 'Creación de artículos y contenido de alta calidad para el blog E, con enfoque en SEO y estrategias de contenido.', 'https://i0.wp.com/res.cloudinary.com/djdesignerlab/image/upload/v1602264211/wp-uploads/SEO-Strategies-min_pn3uwz.jpg?w=1080&ssl=1', 1, 750.00, 1, '2024-08-15', '2024-10-15', '2024-08-28 13:56:21', 'Redacción de contenido, Estrategias de SEO', 'Oferta', NULL, 'No', 'Pagado'),
-(8, 'empresas', NULL, NULL, 4, 'Desarrollo de Software Personalizado para Cliente F', 'Desarrollo de un software personalizado para la empresa cliente F, incluyendo análisis, diseño y programación.', 'https://softwarewebsas.com/public/images/blog/dev.webp', 1, 3500.00, 1, '2024-08-01', '2025-01-31', '2024-08-28 13:57:03', 'Desarrollo de software, Personalización', 'Servicio', 'https://github.com', 'Sí', 'Pendiente');
+(2, 'empresas', NULL, NULL, 4, 'Rediseño de Página Webs', 'Rediseño completo de una página web para una empresa de moda.', 'https://pixelemos.com/wp-content/uploads/2017/06/como-crear-un-sitio-web.jpg', 1, 1500.00, 1, '2025-01-13', '2025-02-05', '2024-08-28 13:07:06', 'Diseño web, UX/UI, Desarrollo frontend', 'Oferta', 'https://github.com/', 'No', 'Pendiente'),
+(7, 'freelancers', NULL, 1, NULL, 'Creación de Contenido para Blog', 'Creación de artículos y contenido de alta calidad para el blog E, con enfoque en SEO y estrategias de contenido.', 'https://i0.wp.com/res.cloudinary.com/djdesignerlab/image/upload/v1602264211/wp-uploads/SEO-Strategies-min_pn3uwz.jpg?w=1080&ssl=1', 1, 750.00, 1, '2025-01-13', '2025-02-20', '2024-08-28 13:56:21', 'Redacción de contenido, Estrategias de SEO', 'Oferta', NULL, 'No', 'Pagado'),
+(8, 'empresas', NULL, NULL, 4, 'Desarrollo de Software Personalizado para Cliente F', 'Desarrollo de un software personalizado para la empresa cliente F, incluyendo análisis, diseño y programación.', 'https://softwarewebsas.com/public/images/blog/dev.webp', 1, 3500.00, 1, '2025-01-13', '2025-03-15', '2024-08-28 13:57:03', 'Desarrollo de software, Personalización', 'Servicio', 'https://github.com', 'Sí', 'Pendiente'),
+(31, 'empresas', NULL, NULL, 4, 'Creación de una dApp', 'Crear una dApp con Scaffold-ETH-2 para la administración de una DAO.', 'https://miro.medium.com/v2/resize:fit:400/0*RnvmtiFbfDWsZu6N.jpg', 1, 12.00, 1, '2025-01-08', '2025-01-09', '2025-01-08 21:32:04', 'Una dApp que asigne tareas a los contribuyentes de la DAO y que obtengan recompensas al cobrarlas. ', 'Oferta', NULL, 'No', 'Pendiente');
 
 --
 -- Disparadores `proyectos`
@@ -491,6 +506,34 @@ CREATE TRIGGER `auditoria_proyectos_update` AFTER UPDATE ON `proyectos` FOR EACH
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tareas`
+--
+
+CREATE TABLE `tareas` (
+  `id` int(11) NOT NULL,
+  `proyecto_id` int(11) NOT NULL,
+  `descripcion` varchar(255) NOT NULL,
+  `fecha_registro` datetime DEFAULT current_timestamp(),
+  `completado` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tareas`
+--
+
+INSERT INTO `tareas` (`id`, `proyecto_id`, `descripcion`, `fecha_registro`, `completado`) VALUES
+(1, 31, 'Crear la Interfaz Gráfica', '2025-01-08 17:32:04', 0),
+(2, 31, 'Crear el Smart Contract', '2025-01-08 17:32:04', 0),
+(3, 2, 'Estilizar con CSS', '2025-01-11 17:07:19', 1),
+(4, 2, 'Crear animaciones con JS', '2025-01-12 23:43:29', 1),
+(5, 7, 'Crear Artículo de: Ciencias Naturales', '2025-01-12 23:44:49', 0),
+(6, 7, 'Crear Artíuclo de: Matemáticas', '2025-01-12 23:44:49', 0),
+(7, 8, 'Diseñar Interfaz Gráfica', '2025-01-12 23:45:27', 0),
+(8, 8, 'Programar funcionalidad en PHP', '2025-01-12 23:45:27', 0);
 
 -- --------------------------------------------------------
 
@@ -617,6 +660,12 @@ ALTER TABLE `proyectos`
   ADD KEY `categoria_id` (`categoria_id`);
 
 --
+-- Indices de la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios_aceptados`
 --
 ALTER TABLE `usuarios_aceptados`
@@ -643,7 +692,7 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -679,7 +728,7 @@ ALTER TABLE `freelancers`
 -- AUTO_INCREMENT de la tabla `interesados_proyecto`
 --
 ALTER TABLE `interesados_proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `membership_purchases`
@@ -697,7 +746,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT de la tabla `tareas`
+--
+ALTER TABLE `tareas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_aceptados`

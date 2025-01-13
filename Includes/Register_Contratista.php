@@ -72,111 +72,134 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <style>
-    body {
-        background-image: url('../Assets/images/2312616.jpg');
-        font-family: 'Arial', sans-serif;
-        background-color: #abdcdf;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 80%;
-        margin: 20px;
-    }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    background-image: url('../Assets/images/2312616.jpg');
+    font-family: 'Arial', sans-serif;
+    background-color: #abdcdf;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    margin: 20px;
+}
+
+.form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 700px;
+    box-sizing: border-box;
+    animation: fadeIn 0.5s ease-out;
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 24px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #444;
+    font-size: 14px;
+}
+
+label i {
+    margin-right: 8px;
+    color: #007BFF;
+    font-size: 16px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus {
+    border-color: #007BFF;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 768px) {
     .form-container {
-        background: #fff;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        width: 100%;
-        max-width: 700px;
-        box-sizing: border-box;
+        padding: 15px;
+        /* Ajustar padding en pantallas pequeñas */
     }
 
     h2 {
-        margin-top: 0;
-        color: #333;
-        font-size: 24px;
-        text-align: center;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
+        font-size: 20px;
     }
 
     label {
-        display: flex;
-        align-items: center;
-        margin-bottom: 8px;
-        font-weight: bold;
-        color: #444;
-        font-size: 14px;
-    }
-
-    label i {
-        margin-right: 8px;
-        color: #007BFF;
-        font-size: 16px;
+        font-size: 12px;
     }
 
     input[type="text"],
     input[type="email"],
     input[type="password"],
     textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-sizing: border-box;
-    }
-
-    textarea {
-        resize: vertical;
-        min-height: 120px;
+        padding: 10px;
     }
 
     button {
-        width: 100%;
-        padding: 12px;
-        background-color: #007BFF;
-        color: #fff;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s;
+        font-size: 14px;
     }
+}
 
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    /* Media Query para pantallas pequeñas */
-    @media (max-width: 768px) {
-        .form-container {
-            padding: 15px;
-            /* Ajustar padding en pantallas pequeñas */
-        }
-
-        h2 {
-            font-size: 20px;
-        }
-
-        label {
-            font-size: 12px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        textarea {
-            padding: 10px;
-        }
-
-        button {
-            font-size: 14px;
-        }
-    }
 </style>
 
 <body>

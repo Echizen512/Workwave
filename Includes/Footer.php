@@ -18,14 +18,6 @@
             <p><i class="fa fa-envelope mr-2"></i>info@workwake.com</p>
         </div>
         <div class="col-lg-3 col-md-6 mb-5">
-            <h4 class="text-white mb-4">Enlaces Rápidos</h4>
-            <div class="d-flex flex-column justify-content-start">
-                <a class="text-white mb-2" href="./Inicio.php"><i class="fa fa-angle-right mr-2"></i>Inicio</a>
-                <a class="text-white mb-2" href="./Información.php"><i class="fa fa-angle-right mr-2"></i>Información</a>
-                <a class="text-white mb-2" href="./Servicios.php"><i class="fa fa-angle-right mr-2"></i>Servicios</a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-5">
             
         </div>
     </div>

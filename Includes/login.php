@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['role'] = $table;
 
                 // Redirige al usuario según su rol
-                header('Location: ../Inicio.php');
+                header('Location: ../Proyectos.php');
                 exit();
             }
         }

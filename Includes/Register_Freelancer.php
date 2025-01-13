@@ -70,6 +70,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../Assets/css/bootstrap.min.css">
     <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('../Assets/images/2312616.jpg');
@@ -90,6 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 100%;
             max-width: 700px;
             box-sizing: border-box;
+            animation: fadeIn 0.5s ease-out;
         }
 
         h2 {

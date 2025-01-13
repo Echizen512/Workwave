@@ -32,27 +32,29 @@ include './Includes/Header.php';
     </div>
 
     <div class="container">
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="mb-5">
-                <form action="" method="GET">
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control form-control-lg" placeholder="Buscar" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-                        <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary"><i class="fa fa-search"></i></span>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="mb-5">
+                    <form action="" method="GET">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control form-control-lg" placeholder="Buscar"
+                                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-transparent text-primary"><i
+                                        class="fa fa-search"></i></span>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 
-            <?php
-            $sql_categorias = "SELECT id, nombre FROM categorias";
-            $result_categorias = $conn->query($sql_categorias);
+                <?php
+                $sql_categorias = "SELECT id, nombre FROM categorias";
+                $result_categorias = $conn->query($sql_categorias);
 
-            $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
-            $categoria_id = isset($_GET['categoria_id']) ? intval($_GET['categoria_id']) : 0;
+                $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+                $categoria_id = isset($_GET['categoria_id']) ? intval($_GET['categoria_id']) : 0;
 
-            $sql_proyectos = "SELECT p.*, c.nombre AS nombre_categoria, 
+                $sql_proyectos = "SELECT p.*, c.nombre AS nombre_categoria, 
                             CASE 
                                 WHEN p.tipo_usuario = 'contratistas' THEN co.nombre
                                 WHEN p.tipo_usuario = 'freelancers' THEN f.nombre
@@ -65,58 +67,97 @@ include './Includes/Header.php';
                             LEFT JOIN empresas e ON p.tipo_usuario = 'empresas' AND p.empresa_id = e.id
                             WHERE p.estado = 1" . ($categoria_id > 0 ? " AND p.categoria_id = $categoria_id" : "");
 
-                                if ($search) {
-                                    $sql_proyectos .= " AND (p.titulo LIKE '%$search%' OR p.descripcion LIKE '%$search%')";
-                                }
+                if ($search) {
+                    $sql_proyectos .= " AND (p.titulo LIKE '%$search%' OR p.descripcion LIKE '%$search%')";
+                }
 
-                                $total_result = $conn->query($sql_proyectos);
-                                $total_proyectos = $total_result->num_rows;
-                                $proyectos_por_pagina = 8;
-                                $total_paginas = ceil($total_proyectos / $proyectos_por_pagina);
+                $total_result = $conn->query($sql_proyectos);
+                $total_proyectos = $total_result->num_rows;
+                $proyectos_por_pagina = 8;
+                $total_paginas = ceil($total_proyectos / $proyectos_por_pagina);
 
-                                $pagina = isset($_GET['pagina']) ? intval($_GET['pagina']) : 1;
-                                $offset = ($pagina - 1) * $proyectos_por_pagina;
-                                $sql_proyectos .= " LIMIT $offset, $proyectos_por_pagina";
-                                $result_proyectos = $conn->query($sql_proyectos);
-                                ?>
+                $pagina = isset($_GET['pagina']) ? intval($_GET['pagina']) : 1;
+                $offset = ($pagina - 1) * $proyectos_por_pagina;
+                $sql_proyectos .= " LIMIT $offset, $proyectos_por_pagina";
+                $result_proyectos = $conn->query($sql_proyectos);
+                ?>
+
+                <style>
+                    .card {
+                        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+                        border-radius: 10px;
+                    }
+
+                    .card:hover {
+                        transform: translateY(-10px);
+                        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+                    }
+
+                    .card-img-top {
+                        transition: transform 0.2s ease-in-out;
+                        border-top-left-radius: 10px;
+                        border-top-right-radius: 10px;
+                    }
+
+                    .card-img-top:hover {
+                        transform: scale(1.05);
+                    }
+
+                    .card-body {
+                        transition: background-color 0.3s ease-in-out;
+                    }
+
+                    .card-body:hover {
+                        background-color: #e9ecef;
+                    }
+
+                    .btn-primary {
+                        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+                        border-radius: 5px;
+                    }
+
+                    .btn-primary:hover {
+                        background-color: #004085;
+                        transform: translateY(-3px);
+                    }
+                </style>
 
                 <div class="row">
-                <?php
-if ($result_proyectos->num_rows > 0) {
-    while ($row = $result_proyectos->fetch_assoc()) {
-        $id = $row['id'];
-        $imagen = $row['image_url'];
-        $nombre_usuario = $row['nombre_usuario'];
-        $titulo = $row['titulo'];
-        $descripcion = strlen($row['descripcion']) > 100 ? substr($row['descripcion'], 0, strrpos(substr($row['descripcion'], 0, 100), ' ')) . '...' : $row['descripcion'];
-        $categoria = $row['nombre_categoria'];
-        $precio = $row['precio'];
-        $intereses = $row['intereses'];
-        $etiqueta = isset($row['Etiqueta']) ? $row['Etiqueta'] : '';
+                    <?php
+                    if ($result_proyectos->num_rows > 0) {
+                        while ($row = $result_proyectos->fetch_assoc()) {
+                            $id = $row['id'];
+                            $imagen = $row['image_url'];
+                            $nombre_usuario = $row['nombre_usuario'];
+                            $titulo = $row['titulo'];
+                            $descripcion = strlen($row['descripcion']) > 100 ? substr($row['descripcion'], 0, strrpos(substr($row['descripcion'], 0, 100), ' ')) . '...' : $row['descripcion'];
+                            $categoria = $row['nombre_categoria'];
+                            $precio = $row['precio'];
+                            $intereses = $row['intereses'];
+                            $etiqueta = isset($row['Etiqueta']) ? $row['Etiqueta'] : '';
 
-        echo "
-        <div class='col-md-6 mb-4'>
-            <div class='card' style='height: 650px;'>
-                <img class='card-img-top' src='$imagen' alt='$titulo'>
-                <div class='card-body'>
-                    <h5 class='card-title'>$titulo</h5>
-                    <p class='card-text'>$descripcion</p>
-                    <p class='card-text'><strong>Intereses:</strong> $intereses</p>
-                    <p class='card-text'><strong>Precio:</strong> $precio</p>
-                    <div class='text-center'>
-                    <a href='Articulos.php?id=$id' class='btn btn-primary'>Visualizar</a>
-                    </div>
-                </div>
-                <div class='card-footer'>
-                    <small class='text-muted'><i class='fa fa-user'></i> $nombre_usuario</small>
-                    <small class='text-muted'><i class='fa fa-folder'></i> $categoria</small>
-                    <small class='text-muted'><i class='fa fa-file'></i> $etiqueta</small>
+                            echo "<div class='col-md-6 mb-4'>
+                            <div class='card' style='height: 650px;'>
+                                <img class='card-img-top' style='max-height: 300px; object-fit: cover;' src='$imagen' alt='$titulo'>
+                                <div class='card-body'>
+                                    <h5 class='card-title'>$titulo</h5>
+                                    <p class='card-text'>$descripcion</p>
+                                    <p class='card-text'><strong>Intereses:</strong> $intereses</p>
+                                    <p class='card-text'><strong>Precio:</strong> $precio</p>
+                                    <div class='text-center'>
+                                    <a href='Articulos.php?id=$id' class='btn btn-primary'>Visualizar</a>
+                                    </div>
+                                </div>
+                                <div class='card-footer'>
+                                    <small class='text-muted'><i class='fa fa-user'></i> $nombre_usuario</small>
+                                    <small class='text-muted'><i class='fa fa-folder'></i> $categoria</small>
+                                    <small class='text-muted'><i class='fa fa-file'></i> $etiqueta</small>
 
-                </div>
-            </div>
-        </div>";
-    }
-}
+                                </div>
+                            </div>
+                        </div>";
+                        }
+                    }
 
                     ?>
                 </div>
@@ -125,19 +166,26 @@ if ($result_proyectos->num_rows > 0) {
                     <div class="col-12">
                         <nav aria-label="Navegación de páginas">
                             <ul class="pagination justify-content-center mb-0">
-                                <li class="page-item <?php if ($pagina <= 1) echo 'disabled'; ?>">
-                                    <a class="page-link" href="?pagina=<?php echo ($pagina - 1 < 1) ? 1 : $pagina - 1; ?>" aria-label="Anterior">
+                                <li class="page-item <?php if ($pagina <= 1)
+                                    echo 'disabled'; ?>">
+                                    <a class="page-link"
+                                        href="?pagina=<?php echo ($pagina - 1 < 1) ? 1 : $pagina - 1; ?>"
+                                        aria-label="Anterior">
                                         <span aria-hidden="true">&laquo;</span>
                                         <span class="sr-only">Anterior</span>
                                     </a>
                                 </li>
                                 <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
-                                    <li class="page-item <?php if ($pagina == $i) echo 'active'; ?>">
+                                    <li class="page-item <?php if ($pagina == $i)
+                                        echo 'active'; ?>">
                                         <a class="page-link" href="?pagina=<?php echo $i; ?>"><?php echo $i; ?></a>
                                     </li>
                                 <?php endfor; ?>
-                                <li class="page-item <?php if ($pagina >= $total_paginas) echo 'disabled'; ?>">
-                                    <a class="page-link" href="?pagina=<?php echo ($pagina + 1 > $total_paginas) ? $total_paginas : $pagina + 1; ?>" aria-label="Siguiente">
+                                <li class="page-item <?php if ($pagina >= $total_paginas)
+                                    echo 'disabled'; ?>">
+                                    <a class="page-link"
+                                        href="?pagina=<?php echo ($pagina + 1 > $total_paginas) ? $total_paginas : $pagina + 1; ?>"
+                                        aria-label="Siguiente">
                                         <span aria-hidden="true">&raquo;</span>
                                         <span class="sr-only">Siguiente</span>
                                     </a>
@@ -151,7 +199,7 @@ if ($result_proyectos->num_rows > 0) {
 
             <div class="col-lg-4 mt-5 mt-lg-0">
                 <div class="mb-5">
-                <h3 class="font-weight-bold mb-4 icon-header"><i class="fas fa-th"></i> Categorías</h3>
+                    <h3 class="font-weight-bold mb-4 icon-header"><i class="fas fa-th"></i> Categorías</h3>
                     <ul class="list-group">
                         <?php
                         if ($result_categorias->num_rows > 0) {
@@ -174,9 +222,9 @@ if ($result_proyectos->num_rows > 0) {
                     </ul>
                 </div>
 
-                    <?php
-                    include './Config/conexion.php'; 
-                            $sql_recent_posts = "SELECT p.*, c.nombre AS nombre_categoria, 
+                <?php
+                include './Config/conexion.php';
+                $sql_recent_posts = "SELECT p.*, c.nombre AS nombre_categoria, 
                                                         CASE 
                                                             WHEN p.tipo_usuario = '	contratistas' THEN co.nombre
                                                             WHEN p.tipo_usuario = 'freelancers' THEN f.nombre
@@ -191,30 +239,76 @@ if ($result_proyectos->num_rows > 0) {
                                                 ORDER BY p.fecha_registro DESC
                                                 LIMIT 4";
 
-                            $result_recent_posts = $conn->query($sql_recent_posts);
+                $result_recent_posts = $conn->query($sql_recent_posts);
 
-                            if ($result_recent_posts === false) {
-                                die('Error en la consulta SQL: ' . $conn->error);
-                            }
-                        ?>
+                if ($result_recent_posts === false) {
+                    die('Error en la consulta SQL: ' . $conn->error);
+                }
+                ?>
 
 
-                    <div class="mb-5">
-                    <h3 class="font-weight-bold mb-4 icon-header"><i class="fas fa-project-diagram"></i> Proyectos Recientes</h3>
-                        <?php
-                        if ($result_recent_posts->num_rows > 0) {
-                            while ($row = $result_recent_posts->fetch_assoc()) {
-                                $imagen = $row['image_url'];
-                                $nombre_usuario = $row['nombre_usuario'];
-                                $titulo = $row['titulo'];
-                                $categoria = $row['nombre_categoria'];
-                                $comentarios = 0; 
+                <style>
+                    .icon-header i {
+                        transition: transform 0.3s ease-in-out;
+                    }
 
-                                echo "
+                    .icon-header i:hover {
+                        transform: rotate(20deg);
+                    }
+
+                    .img-fluid {
+                        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+                        border-radius: 10px;
+                    }
+
+                    .img-fluid:hover {
+                        transform: scale(1.1);
+                        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                    }
+
+                    .text-dark {
+                        transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+                    }
+
+                    .text-dark:hover {
+                        color: #0056b3;
+                        transform: translateX(5px);
+                    }
+
+                    .d-flex small {
+                        transition: color 0.3s ease-in-out;
+                    }
+
+                    .d-flex small:hover {
+                        color: #007bff;
+                    }
+
+                    .border-bottom {
+                        transition: background-color 0.3s ease-in-out;
+                    }
+
+                    .border-bottom:hover {
+                        background-color: #f8f9fa;
+                    }
+                </style>
+
+                <div class="mb-5">
+                    <h3 class="font-weight-bold mb-4 icon-header"><i class="fas fa-project-diagram"></i> Proyectos
+                        Recientes</h3>
+                    <?php
+                    if ($result_recent_posts->num_rows > 0) {
+                        while ($row = $result_recent_posts->fetch_assoc()) {
+                            $imagen = $row['image_url'];
+                            $nombre_usuario = $row['nombre_usuario'];
+                            $titulo = $row['titulo'];
+                            $categoria = $row['nombre_categoria'];
+                            $comentarios = 0;
+
+                            echo "
                                 <div class='d-flex align-items-center border-bottom mb-3 pb-3'>
                                     <img class='img-fluid' src='$imagen' alt='' style='width: 80px; height: 80px;' alt=''>
                                     <div class='d-flex flex-column pl-3'>
-                                        <a class='text-dark mb-2' href=''>".htmlspecialchars($titulo)."</a>
+                                        <a class='text-dark mb-2' href=''>" . htmlspecialchars($titulo) . "</a>
                                         <div class='d-flex'>
                                             <small class='mr-3'><i class='fa fa-user text-primary'></i> $nombre_usuario</small>
                                             <small class='mr-3'><i class='fa fa-folder text-primary'></i> $categoria</small>
@@ -222,20 +316,22 @@ if ($result_proyectos->num_rows > 0) {
                                         </div>
                                     </div>
                                 </div>";
-                            }
-                        } else {
-                            echo "<p>No recent posts found</p>";
                         }
-                        ?>
-                    </div>
+                    } else {
+                        echo "<p>No recent posts found</p>";
+                    }
+                    ?>
+                </div>
 
-            <div class="mb-5">
-                <img src="./Assets/images/about.png" alt="WorkWave Offerings" class="img-fluid">
-            </div>
+                <div class="mb-5">
+                    <img src="./Assets/images/about.png" alt="WorkWave Offerings" class="img-fluid">
+                </div>
                 <div>
                     <h3 class="font-weight-bold mb-4 text-justify">Publica o Encuentra Ofertas de Trabajo</h3>
                     <p class="text-justify">
-                        En WorkWave, conectamos clientes y profesionales. Publica tus proyectos o busca oportunidades para colaborar con expertos. Con nuestras herramientas, gestionar ofertas y proyectos es más fácil y eficiente.
+                        En WorkWave, conectamos clientes y profesionales. Publica tus proyectos o busca oportunidades
+                        para colaborar con expertos. Con nuestras herramientas, gestionar ofertas y proyectos es más
+                        fácil y eficiente.
                     </p>
                 </div>
             </div>
@@ -245,4 +341,5 @@ if ($result_proyectos->num_rows > 0) {
     <?php include './Includes/Footer.php'; ?>
 
 </body>
+
 </html>

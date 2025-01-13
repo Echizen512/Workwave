@@ -53,11 +53,8 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
                     <div class="navbar-nav ml-auto py-0">
-                        <a href="Inicio.php" class="nav-item nav-link active"><i class="fas fa-home mr-2"></i>Inicio</a>
-                        <a href="Informacion.php" class="nav-item nav-link"><i
-                                class="fas fa-info-circle mr-2"></i>Información</a>
-                        <a href="Servicios.php" class="nav-item nav-link"><i
-                                class="fas fa-concierge-bell mr-2"></i>Servicios</a>
+                        
+            
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i
                                     class="fas fa-project-diagram mr-2"></i>Proyectos</a>

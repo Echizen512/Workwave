@@ -29,6 +29,58 @@ include './Includes/Header.php';
 <body>
 
     <style>
+        /* Animación de entrada */
+@keyframes entrada {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de agrandar y encoger */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Animación de rotación */
+@keyframes girar {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.card-header {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    animation: entrada 1s ease-out;
+}
+
+.card {
+    border-radius: 20px;
+    animation: pulse 2s infinite;
+}
+
+.fas.fa-star, .fas.fa-crown {
+    animation: girar 5s infinite linear;
+}
+
+/* Añadir animación a las columnas al pasar el cursor */
+.col:hover {
+    animation: pulse 0.5s;
+}
+
         footer {
             width: 100vw;
             position: relative;
@@ -36,12 +88,14 @@ include './Includes/Header.php';
             margin-left: calc(-50vw + 50%);
             text-align: center;
         }
+
+
     </style>
 
     <div class="container py-3">
         <div class="card shadow-lg border-primary">
             <div class="card-header bg-primary text-white text-center">
-                <h1 class="display-4 fw-normal">Membresías</h1>
+                <h1 class="display-4 fw-normal text-white">Membresías</h1>
             </div>
             <div class="card-body">
                 <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">

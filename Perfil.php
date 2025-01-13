@@ -59,6 +59,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style type="text/css">
+
         .card {
             position: relative;
             display: flex;
@@ -113,6 +114,7 @@ $conn->close();
     </style>
 
 </head>
+
 
 <body>
     <br><br>
@@ -309,8 +311,8 @@ $conn->close();
 
                                 <div class="row mb-3">
                                     <div class="col-sm-3"></div>
-                                    <div class="col-sm-9 text-secondary">
-                                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                    <div class="col-sm-9 text-secondary text-center">
+                                        <button type="submit" class="btn btn-primary" style="border-radius: 20px;">Guardar Cambios</button>
                                     </div>
                                 </div>
                             </form>

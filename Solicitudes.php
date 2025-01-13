@@ -1,5 +1,5 @@
 <?php
-include './config/conexion.php'; 
+include './config/conexion.php';
 session_start();
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
@@ -30,6 +30,7 @@ $result = $stmt->get_result();
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Interesados en tus Proyectos</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
@@ -38,23 +39,85 @@ $result = $stmt->get_result();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 </head>
+
+<style>
+    /* Animaciones para la tabla */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-20px);
+        }
+
+        to {
+            transform: translateY(0);
+        }
+    }
+
+    .thead-blue th {
+        background-color: #007BFF;
+        /* Azul para el encabezado */
+        color: white;
+    }
+
+    .table {
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    .table tbody tr {
+        animation: slideIn 0.5s ease-in-out;
+    }
+
+
+    .text-center {
+        text-align: center;
+    }
+
+    /* Estilo para botones */
+    .btn-info,
+    .btn-success,
+    .btn-danger {
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-info:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-success:hover {
+        background-color: #28a745;
+    }
+
+    .btn-danger:hover {
+        background-color: #dc3545;
+    }
+</style>
+
 <body>
-<br> 
+    <br>
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
                 <h4 class="mb-0">Interesados en tus Proyectos</h4>
             </div>
             <div class="card-body">
-                <table id="tabla_interesados" class="table table-striped table-bordered">
-                    <thead>
+                <table id="tabla_interesados" class="table table-bordered">
+                    <thead class="thead-blue">
                         <tr>
                             <th>Nombre del Interesado</th>
                             <th>Correo Electrónico</th>
                             <th>Teléfono</th>
                             <th>Nombre del Proyecto</th>
                             <th>Rol de Solicitante</th>
-                            <th>Acciones</th> 
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,33 +127,32 @@ $result = $stmt->get_result();
                                 $usuario_id = htmlspecialchars($row['usuario_id']);
                                 $rol_solicitante = htmlspecialchars($row['rol_solicitante']);
                                 $proyecto_id = htmlspecialchars($row['id_proyecto']);
-                                
-                                // Verificar si el usuario ya fue aceptado
+
                                 $sql_aceptados = "SELECT * FROM usuarios_aceptados WHERE proyecto_id = ? AND usuario_id = ? AND rol_solicitante = ?";
                                 $stmt_aceptados = $conn->prepare($sql_aceptados);
                                 if ($stmt_aceptados === false) {
                                     die("Error en la preparación de la consulta: " . $conn->error);
                                 }
                                 $stmt_aceptados->bind_param('iis', $proyecto_id, $usuario_id, $rol_solicitante);
-                                
+
                                 if (!$stmt_aceptados->execute()) {
                                     die("Error en la ejecución de la consulta: " . $stmt_aceptados->error);
                                 }
-                                
+
                                 $result_aceptados = $stmt_aceptados->get_result();
 
                                 echo '<tr>';
-                                echo '<td>' . htmlspecialchars($row['nombre_interesado']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['email_interesado']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['telefono_interesado']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['nombre_proyecto']) . '</td>';
-                                echo '<td>' . htmlspecialchars($row['rol_solicitante']) . '</td>';
-                                echo '<td>';
+                                echo '<td class="text-center">' . htmlspecialchars($row['nombre_interesado']) . '</td>';
+                                echo '<td class="text-center">' . htmlspecialchars($row['email_interesado']) . '</td>';
+                                echo '<td class="text-center">' . htmlspecialchars($row['telefono_interesado']) . '</td>';
+                                echo '<td class="text-center">' . htmlspecialchars($row['nombre_proyecto']) . '</td>';
+                                echo '<td class="text-center">' . htmlspecialchars($row['rol_solicitante']) . '</td>';
+                                echo '<td class="text-center">';
 
                                 if ($result_aceptados->num_rows > 0) {
                                     echo '<span style="color: green;">Aceptado</span>';
                                 } else {
-                                    echo '<a href="ver_perfil.php?usuario_id=' . $usuario_id . '&rol_solicitante=' . urlencode($rol_solicitante) . '" class="btn btn-info" style="margin: 5px;"><i class="fas fa-user" style="margin: 5px;"></i>Ver Perfil</a>'; 
+                                    echo '<a href="ver_perfil.php?usuario_id=' . $usuario_id . '&rol_solicitante=' . urlencode($rol_solicitante) . '" class="btn btn-info" style="margin: 5px;"><i class="fas fa-user" style="margin: 5px;"></i>Ver Perfil</a>';
                                     echo '<button class="btn btn-success" style="margin: 5px;" onclick="confirmarAceptar(' . $proyecto_id . ', ' . $usuario_id . ', \'' . $rol_solicitante . '\')"><i class="fas fa-check" style="margin: 5px;"></i>Aceptar</button> ';
                                     echo '<button class="btn btn-danger" style="margin: 5px;" onclick="rechazarSolicitud(' . $proyecto_id . ', ' . $usuario_id . ')"><i class="fas fa-times" style="margin: 5px;"></i>Rechazar</button>';
                                 }
@@ -109,7 +171,7 @@ $result = $stmt->get_result();
     </div>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#tabla_interesados').DataTable(); // Inicializar DataTables
         });
 
@@ -150,6 +212,7 @@ $result = $stmt->get_result();
         }
     </script>
 </body>
+
 </html>
 
 <?php
