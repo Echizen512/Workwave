@@ -13,50 +13,75 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sitio_web = $_POST['empresa_sitio_web'];
     $contrasena = password_hash($_POST['empresa_password'], PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO empresas (nombre_empresa, email, telefono, rif, direccion, descripcion_empresa, sitio_web, contrasena) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $ch = curl_init();
 
-    $stmt = $conn->prepare($sql);
-    if ($stmt === false) {
-        $alertScript = '
-            <script>
-                Swal.fire({
-                    icon: "error",
-                    title: "Error",
-                    text: "Error en la preparación de la consulta: ' . $conn->error . '"
-                });
-            </script>';
-    } else {
-        $stmt->bind_param("ssssssss", $nombre_empresa, $email, $telefono, $rif, $direccion, $descripcion_empresa, $sitio_web, $contrasena);
+    curl_setopt($ch, CURLOPT_URL, 'https://emailvalidation.abstractapi.com/v1/?api_key=dc4d999302094e83bcb76321712c2cc2&email=' . urlencode($email));
 
-        if ($stmt->execute()) {
-            $alertScript = '
-                <script>
-                    Swal.fire({
-                        icon: "success",
-                        title: "Registro exitoso",
-                        text: "Serás redirigido al login.",
-                        confirmButtonText: "Aceptar"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "login.html";
-                        }
-                    });
-                </script>';
-        } else {
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+    $data = curl_exec($ch);
+
+    curl_close($ch);
+
+    $response = json_decode($data, true);
+
+    if ($response && $response['is_valid_format']['value']) {
+        $sql = "INSERT INTO empresas (nombre_empresa, email, telefono, rif, direccion, descripcion_empresa, sitio_web, contrasena) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
             $alertScript = '
                 <script>
                     Swal.fire({
                         icon: "error",
                         title: "Error",
-                        text: "' . $stmt->error . '"
+                        text: "Error en la preparación de la consulta: ' . $conn->error . '"
                     });
                 </script>';
-        }
+        } else {
+            $stmt->bind_param("ssssssss", $nombre_empresa, $email, $telefono, $rif, $direccion, $descripcion_empresa, $sitio_web, $contrasena);
 
-        $stmt->close();
+            if ($stmt->execute()) {
+                $alertScript = '
+                    <script>
+                        Swal.fire({
+                            icon: "success",
+                            title: "Registro exitoso",
+                            text: "Serás redirigido al login.",
+                            confirmButtonText: "Aceptar"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "../login.html";
+                            }
+                        });
+                    </script>';
+            } else {
+                $alertScript = '
+                    <script>
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "' . $stmt->error . '"
+                        });
+                    </script>';
+            }
+
+            $stmt->close();
+        }
+        $conn->close();
+    } else {
+        $alertScript = '
+            <script>
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: "El correo electrónico no es válido."
+                });
+            </script>';
     }
-    $conn->close();
 }
 ?>
 
