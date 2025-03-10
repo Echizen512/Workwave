@@ -38,6 +38,7 @@ include './Dashboard.php';
     <div class="card">
         <div class="card-header bg-primary text-white">
             <h2 class="card-title m-0" style="color: white;">Lista de Auditoría</h2>
+            <a href="generar_reporte2.php" class="btn btn-danger float-end">Generar Reporte</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -79,23 +80,34 @@ include './Dashboard.php';
             </div>
         </div>
         <div class="card-footer text-muted text-center">
-            <p class="mb-0">© 2024 Auditoría de Operaciones</p>
+            <p class="mb-0">© 2025 Auditoría de Operaciones</p>
         </div>
     </div>
 </div>
 
-<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap Bundle JS -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-<!-- DataTables JS -->
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#auditoriaTable').DataTable({
+        "paging": true,
+        "searching": true,
         "language": {
-            "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/Spanish.json"
+            "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/Spanish.json",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+            "search": "Buscar:",
+            "lengthMenu": "Mostrar _MENU_ registros por página",
+            "zeroRecords": "No se encontraron registros",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "No hay registros disponibles",
+            "infoFiltered": "(filtrado de _MAX_ registros en total)"
         }
     });
 });
