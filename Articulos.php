@@ -24,9 +24,9 @@ if ($row = $result->fetch_assoc()) {
     $nombre_proyecto = $row['titulo'];
     $tipo_usuario_creador = $row['tipo_usuario'];
     $creador_id = match($tipo_usuario_creador) {
-        'contratista' => $row['contratista_id'],
-        'freelancer' => $row['freelancer_id'],
-        'empresa' => $row['empresa_id'],
+        'contratistas' => $row['contratista_id'],
+        'freelancers' => $row['freelancer_id'],
+        'empresas' => $row['empresa_id'],
         default => 0,
     };
 }
@@ -66,26 +66,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['proyecto_id'])) {
         $message = 'Ya has mostrado interés en este proyecto.';
         $message_type = 'warning';
     } else {
-        // Preparar los datos para el INSERT
-        $nombre_interesado = $role === 'empresas' ? $userData['nombre_empresa'] : $userData['nombre'];
-        $email_interesado = $userData['email'];
-        $telefono_interesado = $userData['telefono'];
-
-        $sql_insert = "INSERT INTO interesados_proyecto (nombre_interesado, email_interesado, telefono_interesado, id_proyecto, nombre_proyecto, creador_id, tipo_usuario_creador, usuario_id, rol_solicitante)
-                       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt_insert = $conn->prepare($sql_insert);
-        $stmt_insert->bind_param("sssissisi", $nombre_interesado, $email_interesado, $telefono_interesado, $proyecto_id, $nombre_proyecto, $creador_id, $tipo_usuario_creador, $user_id, $role);
-
-        if ($stmt_insert->execute()) {
-            $message = 'Te has registrado como interesado en este proyecto.';
-            $message_type = 'success';
-        } else {
-            $message = 'No se pudo registrar tu interés. Inténtalo nuevamente.';
+        // Validación: Verificar si el usuario que intenta registrarse es el creador del proyecto
+        if ($user_id === $creador_id) {
+            $message = 'No puedes inscribirte en tu propio proyecto.';
             $message_type = 'error';
+        } else {
+            // Preparar los datos para el INSERT
+            $nombre_interesado = $role === 'empresas' ? $userData['nombre_empresa'] : $userData['nombre'];
+            $email_interesado = $userData['email'];
+            $telefono_interesado = $userData['telefono'];
+
+            $sql_insert = "INSERT INTO interesados_proyecto (nombre_interesado, email_interesado, telefono_interesado, id_proyecto, nombre_proyecto, creador_id, tipo_usuario_creador, usuario_id, rol_solicitante)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt_insert = $conn->prepare($sql_insert);
+            $stmt_insert->bind_param("sssisssss", $nombre_interesado, $email_interesado, $telefono_interesado, $proyecto_id, $nombre_proyecto, $creador_id, $tipo_usuario_creador, $user_id, $role);
+
+            if ($stmt_insert->execute()) {
+                $message = 'Te has registrado como interesado en este proyecto.';
+                $message_type = 'success';
+            } else {
+                $message = 'No se pudo registrar tu interés. Inténtalo nuevamente.';
+                $message_type = 'error';
+            }
+            $stmt_insert->close();
         }
-        $stmt_insert->close();
     }
 }
+
 ?>
 
 
@@ -280,13 +287,13 @@ if ($result_recent_posts === false) {
 
 <?php if (!empty($message)): ?>
     <script>
-        Swal.fire({
-            icon: '<?php echo $message_type; ?>',
-            title: '<?php echo $message_type === "success" ? "Registro exitoso" : ($message_type === "warning" ? "Ya registrado" : "Error"); ?>',
-            text: '<?php echo $message; ?>',
-            confirmButtonText: 'OK'
-        });
-    </script>
+    Swal.fire({
+        icon: '<?php echo $message_type; ?>',
+        title: '<?php echo $message_type === "success" ? "Registro exitoso" : ($message_type === "warning" ? "Ya registrado" : "Error"); ?>',
+        text: '<?php echo $message; ?>',
+        confirmButtonText: 'OK'
+    });
+</script>
 <?php endif; ?>
 
 </html>

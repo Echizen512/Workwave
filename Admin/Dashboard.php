@@ -103,6 +103,7 @@
         <a href="./Auditoria.php" style="color: white;">
             <i class="fas fa-search icon" style="color: white;"></i> Auditoría
         </a>
+        <a href="./admin-backup.php" style="color: white;"><i class="fas fa-database icon" style="color: white;"></i> Respaldo</a>
     </div>
 
     <script src="../Assets/js/jquery-3.6.0.min.js"></script>
