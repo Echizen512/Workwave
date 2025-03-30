@@ -23,31 +23,31 @@ if (!is_dir(BACKUP_PATH)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Copia de Seguridad</title>
+    <title>Respaldo de la Base de Datos</title>
     <link href="../Assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="./Assets/CSS/CRUD.css">
 </head>
 <body>
 <div class="container mt-5">
-    <div class="card">
+    <div class="card" style="border: none;">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6 mb-4">
-                    <div class="card text-center shadow-sm">
+                    <div class="card text-center shadow-sm" style="background-color: #f8f9fa;">
                         <div class="card-body">
-                            <h3 class="card-title">Realizar Copia de Seguridad</h3>
-                            <a href="./Backup.php" class="btn btn-primary mt-3"><i class="fas fa-download"></i> Respaldar</a>
+                            <h3 class="card-title">Realizar Respaldo de la Base de Datos</h3>
+                            <a href="./Backup.php" class="btn btn-success mt-3"><i class="fas fa-download"></i> Respaldar</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 mb-4">
-                    <div class="card text-center shadow-sm">
+                    <div class="card text-center shadow-sm" style="background-color: #f8f9fa;">
                         <div class="card-body">
-                            <h3 class="card-title">Restaurar Copia de Seguridad</h3>
+                            <h3 class="card-title">Restaurar Respaldo de la Base de Datos</h3>
                             <form action="./Restore.php" method="post">
                                 <div class="form-group">
-                                    <label for="restorePoint">Seleccionar Copia</label>
+                                    <label for="restorePoint">Seleccionar Respaldo</label>
                                     <select id="restorePoint" name="restorePoint" class="form-control mt-3">
                                         <option value="" disabled selected>Seleccionar</option>
                                         <?php
@@ -72,7 +72,7 @@ if (!is_dir(BACKUP_PATH)) {
                                         ?>
                                     </select>
                                 </div>
-                                <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-upload"></i> Restaurar</button>
+                                <button type="submit" class="btn btn-danger mt-3"><i class="fas fa-upload"></i> Restaurar</button>
                             </form>
                         </div>
                     </div>
