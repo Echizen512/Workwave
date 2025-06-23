@@ -11,6 +11,50 @@ $role = $_SESSION['role'];
 include './config/conexion.php';
 include './Includes/Header.php';
 
+$fecha_inicio = null;
+$fecha_vencimiento = null;
+
+$stmt = $conn->prepare("
+    SELECT purchase_date, expiration_date 
+    FROM membership_purchases 
+    WHERE user_id = ? AND role = ? AND payment_status = 'completed' 
+    ORDER BY expiration_date DESC 
+    LIMIT 1
+");
+$stmt->bind_param("is", $user_id, $role);
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result && $result->num_rows > 0) {
+    $membresia = $result->fetch_assoc();
+    $fecha_inicio = $membresia['purchase_date'];
+    $fecha_vencimiento = $membresia['expiration_date'];
+
+    if (strtotime($fecha_vencimiento) < time()) {
+        echo '
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+        window.onload = function () {
+            Swal.fire({
+                icon: "warning",
+                title: "Membresía vencida",
+                text: "Tu membresía ha expirado. Debes renovarla para continuar.",
+                confirmButtonText: "Ir a Membresías",
+                confirmButtonColor: "#2563eb",
+                allowOutsideClick: false,
+                allowEscapeKey: false
+            }).then(function(result) {
+                if (result.isConfirmed) {
+                    window.location.href = "Membresias.php";
+                }
+            });
+        };
+        </script>';
+        exit();
+    }
+}
+
 $success = false;
 $error_message = '';
 

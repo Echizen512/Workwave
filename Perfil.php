@@ -38,6 +38,25 @@ if ($result->num_rows > 0) {
     exit();
 }
 
+$fecha_inicio = null;
+$fecha_vencimiento = null;
+
+$stmt = $conn->prepare("
+    SELECT purchase_date, expiration_date 
+    FROM membership_purchases 
+    WHERE user_id = ? AND role = ? AND payment_status = 'completed' 
+    ORDER BY expiration_date DESC LIMIT 1
+");
+$stmt->bind_param("is", $userId, $role);
+
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result && $result->num_rows > 0) {
+    $membresia = $result->fetch_assoc();
+    $fecha_inicio = date('d/m/Y', strtotime($membresia['purchase_date']));
+    $fecha_vencimiento = date('d/m/Y', strtotime($membresia['expiration_date']));
+}
 $stmt->close();
 
 $paypalSql = "SELECT cuenta_paypal FROM usuarios_paypal WHERE usuario_id = ?";
@@ -48,6 +67,8 @@ $paypalResult = $paypalStmt->get_result();
 $paypalData = $paypalResult->fetch_assoc();
 
 $conn->close();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -157,6 +178,13 @@ $conn->close();
                                     <p class="font-size-sm <?php echo $colorClass; ?>">
                                         <?php echo $displayText; ?>
                                     </p>
+
+                                    <?php if ($fecha_inicio && $fecha_vencimiento): ?>
+    <p class="text-muted small">
+        <i class="fas fa-calendar-day me-1 text-success"></i>
+        Desde <strong><?php echo $fecha_inicio; ?></strong> hasta <strong><?php echo $fecha_vencimiento; ?></strong>
+    </p>
+<?php endif; ?>
 
 
                                     <button class="btn btn-outline-primary"

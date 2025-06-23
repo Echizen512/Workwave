@@ -67,7 +67,9 @@ include './Dashboard.php';
                                     <td>{$row['id_registro']}</td>
                                     <td>{$row['usuario_id']}</td>
                                     <td>{$row['rol_usuario']}</td>
-                                    <td>" . date('d/m/Y', strtotime($row['fecha'])) . "</td>
+                                    <td>" . date('d/m/Y H:i', strtotime($row['fecha'])) . "</td>
+
+
                                     <td>{$row['descripcion']}</td>
                                 </tr>";
                             }

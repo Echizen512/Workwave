@@ -11,6 +11,41 @@ $role = $_SESSION['role'];
 include './config/conexion.php';
 include './Includes/Header.php';
 
+// Verificación de membresía vencida
+$stmt = $conn->prepare("
+    SELECT expiration_date 
+    FROM membership_purchases 
+    WHERE user_id = ? 
+    AND role = ? 
+    AND payment_status = 'completed' 
+    ORDER BY expiration_date DESC 
+    LIMIT 1
+");
+
+$stmt->bind_param("is", $user_id, $role);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result && $result->num_rows > 0) {
+    $membresia = $result->fetch_assoc();
+    if (strtotime($membresia['expiration_date']) < time()) {
+        echo '
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+        window.onload = function () {
+            Swal.fire({
+                icon: "warning",
+                title: "Membresía vencida",
+                text: "Tu membresía ha expirado. Algunas funciones podrían estar limitadas.",
+                confirmButtonText: "Entendido",
+                confirmButtonColor: "#10b981"
+            });
+        };
+        </script>';
+    }
+}
+$stmt->close();
 ?>
 
 <body>

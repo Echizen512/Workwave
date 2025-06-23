@@ -23,9 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result->num_rows == 1) {
             $user = $result->fetch_assoc();
 
-            // Verifica si el Estado del usuario es inactivo (0)
             if ($user['Estado'] == 0) {
-                // Redirige a login.html con un mensaje de error
                 echo "<script>
                     window.onload = function() {
                         Swal.fire({
@@ -40,20 +38,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 exit();
             }
 
-            // Verifica la contraseña utilizando password_verify
             if (password_verify($password, $user['contrasena'])) {
-                // Almacena el ID del usuario y el rol en la sesión
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['role'] = $table;
 
-                // Redirige al usuario según su rol
+
+                $tabla = $table;
+                $operacion = 'LOGIN';
+                $id_registro = $user['id'];
+                $usuario_id = $user['id'];
+                $rol_usuario = $table; 
+                $descripcion = "Inicio de sesión exitoso desde tabla $table";
+
+                $log_stmt = $conn->prepare("INSERT INTO auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, fecha, descripcion) VALUES (?, ?, ?, ?, ?, NOW(), ?)");
+                $log_stmt->bind_param("ssisss", $tabla, $operacion, $id_registro, $usuario_id, $rol_usuario, $descripcion);
+                $log_stmt->execute();
+                $log_stmt->close();
+
                 header('Location: ../Proyectos.php');
                 exit();
             }
         }
     }
 
-    // Si no se encontró un usuario o la contraseña es incorrecta
     echo "<script>
         window.onload = function() {
             Swal.fire({
