@@ -57,7 +57,8 @@ include './Dashboard.php';
                     <tbody>
                         <?php
                         include './conexion.php';
-                        $sql = "SELECT * FROM Auditoria";
+                        $sql = "SELECT * FROM Auditoria ORDER BY fecha DESC";
+
                         $result = $conn->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
