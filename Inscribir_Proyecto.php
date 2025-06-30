@@ -11,6 +11,7 @@ $role = $_SESSION['role'];
 include './config/conexion.php';
 include './Includes/Header.php';
 
+// Verificar membresía activa
 $fecha_inicio = null;
 $fecha_vencimiento = null;
 
@@ -22,7 +23,6 @@ $stmt = $conn->prepare("
     LIMIT 1
 ");
 $stmt->bind_param("is", $user_id, $role);
-
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -55,14 +55,94 @@ if ($result && $result->num_rows > 0) {
     }
 }
 
+// Obtener datos del usuario según su rol
+$table = '';
+if ($role === 'contratistas') {
+    $table = 'contratistas';
+} elseif ($role === 'empresas') {
+    $table = 'empresas';
+} elseif ($role === 'freelancers') {
+    $table = 'freelancers';
+} else {
+    die("Role not recognized");
+}
+
+$sql = "SELECT * FROM $table WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo "No user found.";
+    exit();
+}
+
+$userData = $result->fetch_assoc();
+$membershipType = $userData['membership_type'];
+
+// Contar proyectos existentes del usuario
+$stmt = $conn->prepare("
+    SELECT COUNT(*) as total FROM proyectos 
+    WHERE tipo_usuario = ? AND (
+        (tipo_usuario = 'contratistas' AND contratista_id = ?) OR
+        (tipo_usuario = 'freelancers' AND freelancer_id = ?) OR
+        (tipo_usuario = 'empresas' AND empresa_id = ?)
+    )
+");
+$stmt->bind_param("siii", $role, $user_id, $user_id, $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$proyectos_count = ($row = $result->fetch_assoc()) ? (int)$row['total'] : 0;
+
+// Verificar límite de proyectos según membresía
+$limite_alcanzado = false;
+if ($membershipType === 'basic' && $proyectos_count >= 1) {
+    $limite_alcanzado = true;
+} elseif ($membershipType === 'silver' && $proyectos_count >= 2) {
+    $limite_alcanzado = true;
+}
+
+if ($limite_alcanzado) {
+    echo '
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    window.onload = function () {
+        Swal.fire({
+            icon: "info",
+            title: "Límite alcanzado",
+            text: "Actualiza tu membresía para subir más proyectos.",
+            confirmButtonText: "Ver Membresías",
+            confirmButtonColor: "#2563eb",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then(function(result) {
+            if (result.isConfirmed) {
+                window.location.href = "Membresias.php";
+            }
+        });
+    };
+    </script>';
+    exit();
+}
+
+// Obtener categorías activas
+$sql = "SELECT id, nombre FROM categorias WHERE estado = '1'";
+$result = $conn->query($sql);
+if ($result === false) {
+    die("Error al obtener las categorías: " . $conn->error);
+}
+$categorias = [];
+while ($row = $result->fetch_assoc()) {
+    $categorias[] = $row;
+}
+
+// Procesar formulario POST
 $success = false;
 $error_message = '';
 
-$tipo_usuario = $role;
-
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $tipo_usuario = $_SESSION['role'];
+    $tipo_usuario = $role;
     $contratista_id = $_POST['contratista_id'] ?? null;
     $freelancer_id = $_POST['freelancer_id'] ?? null;
     $empresa_id = $_POST['empresa_id'] ?? null;
@@ -77,7 +157,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $etiqueta = $_POST['etiqueta'];
     $tareas = $_POST['tareas'] ?? [];
 
-    // Inserción del proyecto
     $conn->begin_transaction();
     try {
         $sql = "INSERT INTO proyectos (tipo_usuario, contratista_id, freelancer_id, empresa_id, titulo, descripcion, image_url, categoria_id, precio, fecha_inicio, fecha_fin, intereses, etiqueta)
@@ -102,11 +181,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
         $proyecto_id = $stmt->insert_id;
 
-        // Inserción de las tareas
         if (!empty($tareas)) {
             $sqlTareas = "INSERT INTO tareas (proyecto_id, descripcion) VALUES (?, ?)";
             $stmtTareas = $conn->prepare($sqlTareas);
-
             foreach ($tareas as $tarea) {
                 $stmtTareas->bind_param("is", $proyecto_id, $tarea);
                 $stmtTareas->execute();
@@ -120,51 +197,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $error_message = "Error al agregar el proyecto y sus tareas: " . $e->getMessage();
     }
 }
-$userId = $_SESSION['user_id'];
-$role = $_SESSION['role'];
-$table = "";
-$table = "";
-
-if ($role === 'contratistas') {
-    $table = "contratistas";
-} elseif ($role === 'empresas') {
-    $table = "empresas";
-} elseif ($role === 'freelancers') {
-    $table = "freelancers";
-} else {
-    die("Role not recognized");
-}
-
-// Preparar y ejecutar la consulta
-$sql = "SELECT * FROM $table WHERE id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $userData = $result->fetch_assoc();
-} else {
-    echo "No user found.";
-    exit();
-}
-
-$membershipType = $userData['membership_type'];
-$membership_start_date = $userData['membership_start_date'];
-$membership_end_date = $userData['membership_end_date'];
-
-$sql = "SELECT id, nombre FROM categorias WHERE estado = '1'";
-$result = $conn->query($sql);
-
-if ($result === false) {
-    die("Error al obtener las categorías: " . $conn->error);
-}
-
-$categorias = [];
-while ($row = $result->fetch_assoc()) {
-    $categorias[] = $row;
-}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">

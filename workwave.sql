@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2025 a las 02:58:31
+-- Tiempo de generación: 30-06-2025 a las 03:31:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -64,21 +64,21 @@ CREATE TABLE `auditoria` (
 INSERT INTO `auditoria` (`id`, `tabla`, `operacion`, `id_registro`, `usuario_id`, `rol_usuario`, `fecha`, `descripcion`) VALUES
 (1, 'Freelancers', 'UPDATE', 1, 1, 'freelancer', '2024-09-17 01:44:35', 'Se actualizó el freelancer: Gojo Satoru'),
 (2, 'interesados_proyecto', 'INSERT', 2, 4, 'empresas', '2024-09-17 10:50:49', 'Se insertó un interesado: Prueba'),
-(3, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-09-22 17:44:06', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(4, 'Proyectos', 'UPDATE', 7, NULL, 'freelancers', '2024-09-22 17:44:13', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
-(5, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-09-22 17:44:20', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(3, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2024-09-22 17:44:06', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(4, 'Proyectos', 'UPDATE', 7, 0, 'freelancers', '2024-09-22 17:44:13', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
+(5, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-09-22 17:44:20', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
 (6, 'interesados_proyecto', 'INSERT', 3, 1, 'freelancers', '2024-09-22 18:51:22', 'Se insertó un interesado: Satoru Gojo'),
-(7, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-09-22 18:57:50', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(8, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-09-22 19:05:40', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(7, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-09-22 18:57:50', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(8, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-09-22 19:05:40', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
 (9, 'interesados_proyecto', 'INSERT', 4, 1, 'freelancers', '2024-09-22 19:15:12', 'Se insertó un interesado: Satoru Gojo'),
-(10, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-09-22 19:15:40', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(11, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-09-22 19:32:42', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(10, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-09-22 19:15:40', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(11, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-09-22 19:32:42', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
 (12, 'interesados_proyecto', 'INSERT', 5, 1, 'freelancers', '2024-09-22 19:33:18', 'Se insertó un interesado: Satoru Gojo'),
-(13, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-09-22 19:33:53', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(14, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-09-22 19:48:37', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(15, 'Proyectos', 'INSERT', 17, NULL, 'empresas', '2024-09-22 19:56:15', 'Se insertó un proyecto: Prueba'),
-(16, 'Proyectos', 'INSERT', 18, NULL, 'empresas', '2024-09-22 19:58:19', 'Se insertó un proyecto: Prueba'),
-(17, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-09-22 19:59:48', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(13, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-09-22 19:33:53', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(14, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-09-22 19:48:37', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(15, 'Proyectos', 'INSERT', 17, 0, 'empresas', '2024-09-22 19:56:15', 'Se insertó un proyecto: Prueba'),
+(16, 'Proyectos', 'INSERT', 18, 0, 'empresas', '2024-09-22 19:58:19', 'Se insertó un proyecto: Prueba'),
+(17, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-09-22 19:59:48', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
 (18, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-10-26 21:34:59', 'Se actualizó la empresa: Suguru Geto'),
 (19, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-10-26 21:38:26', 'Se actualizó la empresa: Suguru Geto'),
 (20, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-10-26 21:42:29', 'Se actualizó la empresa: Suguru Geto'),
@@ -87,11 +87,11 @@ INSERT INTO `auditoria` (`id`, `tabla`, `operacion`, `id_registro`, `usuario_id`
 (23, 'interesados_proyecto', 'INSERT', 6, 1, 'freelancers', '2024-10-27 01:10:32', 'Se insertó un interesado: Satoru Gojo'),
 (24, 'Freelancers', 'UPDATE', 1, 1, 'freelancer', '2024-10-27 01:23:15', 'Se actualizó el freelancer: Satoru Gojo'),
 (25, 'Freelancers', 'UPDATE', 1, 1, 'freelancer', '2024-10-27 01:25:35', 'Se actualizó el freelancer: Satoru Gojo'),
-(26, 'Proyectos', 'UPDATE', 7, NULL, 'freelancers', '2024-11-13 01:30:01', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
-(27, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-11-14 12:42:11', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(28, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-11-14 12:42:32', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(29, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-14 12:50:45', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(30, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-11-14 12:50:46', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(26, 'Proyectos', 'UPDATE', 7, 0, 'freelancers', '2024-11-13 01:30:01', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
+(27, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2024-11-14 12:42:11', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(28, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2024-11-14 12:42:32', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(29, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-14 12:50:45', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(30, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2024-11-14 12:50:46', 'Se actualizó el proyecto: Rediseño de Página Webs'),
 (31, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:02:22', 'Se actualizó la empresa: Suguru Geto'),
 (32, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:03:21', 'Se actualizó la empresa: Suguru Geto'),
 (33, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:03:34', 'Se actualizó la empresa: Suguru Geto'),
@@ -102,51 +102,82 @@ INSERT INTO `auditoria` (`id`, `tabla`, `operacion`, `id_registro`, `usuario_id`
 (38, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:34:54', 'Se actualizó la empresa: Suguru Geto'),
 (39, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:37:10', 'Se actualizó la empresa: Suguru Geto'),
 (40, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:37:57', 'Se actualizó la empresa: Suguru Geto'),
-(41, 'Proyectos', 'INSERT', 19, NULL, 'empresas', '2024-11-14 19:41:18', 'Se insertó un proyecto: aasda'),
+(41, 'Proyectos', 'INSERT', 19, 0, 'empresas', '2024-11-14 19:41:18', 'Se insertó un proyecto: aasda'),
 (42, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-14 19:53:44', 'Se actualizó la empresa: Suguru Geto'),
 (43, 'interesados_proyecto', 'INSERT', 7, 4, 'empresas', '2024-11-14 20:02:09', 'Se insertó un interesado: Satoru Gojo'),
-(44, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:42:34', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(45, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:42:54', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(46, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:43:04', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(47, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:44:08', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(48, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:45:50', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(49, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:46:10', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(50, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:52:14', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(51, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2024-11-15 13:52:21', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(52, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2024-11-15 13:52:28', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(44, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-15 13:42:34', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(45, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-15 13:42:54', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(46, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-15 13:43:04', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(47, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-15 13:44:08', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(48, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-15 13:45:50', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(49, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-15 13:46:10', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(50, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-15 13:52:14', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(51, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2024-11-15 13:52:21', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(52, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2024-11-15 13:52:28', 'Se actualizó el proyecto: Rediseño de Página Webs'),
 (53, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-24 13:42:24', 'Se actualizó la empresa: Suguru Geto'),
 (54, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-24 14:11:41', 'Se actualizó la empresa: Suguru Geto'),
 (55, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-24 14:12:17', 'Se actualizó la empresa: Suguru Geto'),
 (56, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-24 14:19:51', 'Se actualizó la empresa: Suguru Geto'),
-(57, 'Proyectos', 'INSERT', 20, NULL, 'empresas', '2024-11-24 14:57:34', 'Se insertó un proyecto: Prueba'),
-(58, 'Proyectos', 'INSERT', 21, NULL, 'empresas', '2024-11-24 15:20:32', 'Se insertó un proyecto: Prueba'),
-(59, 'Proyectos', 'INSERT', 22, NULL, 'empresas', '2024-11-24 15:21:01', 'Se insertó un proyecto: Pruebaaa'),
-(60, 'Proyectos', 'INSERT', 23, NULL, 'empresas', '2024-11-24 15:21:34', 'Se insertó un proyecto: Pruebaaa'),
-(61, 'Proyectos', 'INSERT', 24, NULL, 'empresas', '2024-11-24 15:21:57', 'Se insertó un proyecto: Pruebasss'),
-(62, 'Proyectos', 'INSERT', 25, NULL, 'empresas', '2024-11-24 15:22:22', 'Se insertó un proyecto: Pruebasssss'),
-(63, 'Proyectos', 'INSERT', 26, NULL, 'empresas', '2024-11-24 15:29:10', 'Se insertó un proyecto: Pruebasssssss'),
-(64, 'Proyectos', 'INSERT', 27, NULL, 'empresas', '2024-11-24 15:29:36', 'Se insertó un proyecto: Pruebaqwqwq'),
-(65, 'Proyectos', 'INSERT', 28, NULL, 'empresas', '2024-11-24 15:34:27', 'Se insertó un proyecto: sdadas'),
-(66, 'Proyectos', 'INSERT', 29, NULL, 'empresas', '2024-11-24 15:35:01', 'Se insertó un proyecto: Pruebasadas'),
+(57, 'Proyectos', 'INSERT', 20, 0, 'empresas', '2024-11-24 14:57:34', 'Se insertó un proyecto: Prueba'),
+(58, 'Proyectos', 'INSERT', 21, 0, 'empresas', '2024-11-24 15:20:32', 'Se insertó un proyecto: Prueba'),
+(59, 'Proyectos', 'INSERT', 22, 0, 'empresas', '2024-11-24 15:21:01', 'Se insertó un proyecto: Pruebaaa'),
+(60, 'Proyectos', 'INSERT', 23, 0, 'empresas', '2024-11-24 15:21:34', 'Se insertó un proyecto: Pruebaaa'),
+(61, 'Proyectos', 'INSERT', 24, 0, 'empresas', '2024-11-24 15:21:57', 'Se insertó un proyecto: Pruebasss'),
+(62, 'Proyectos', 'INSERT', 25, 0, 'empresas', '2024-11-24 15:22:22', 'Se insertó un proyecto: Pruebasssss'),
+(63, 'Proyectos', 'INSERT', 26, 0, 'empresas', '2024-11-24 15:29:10', 'Se insertó un proyecto: Pruebasssssss'),
+(64, 'Proyectos', 'INSERT', 27, 0, 'empresas', '2024-11-24 15:29:36', 'Se insertó un proyecto: Pruebaqwqwq'),
+(65, 'Proyectos', 'INSERT', 28, 0, 'empresas', '2024-11-24 15:34:27', 'Se insertó un proyecto: sdadas'),
+(66, 'Proyectos', 'INSERT', 29, 0, 'empresas', '2024-11-24 15:35:01', 'Se insertó un proyecto: Pruebasadas'),
 (67, 'Empresas', 'UPDATE', 4, 4, 'empresa', '2024-11-24 15:42:08', 'Se actualizó la empresa: Suguru Geto'),
-(68, 'Proyectos', 'INSERT', 30, NULL, 'empresas', '2024-11-24 16:23:34', 'Se insertó un proyecto: Prueba'),
-(69, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-01-08 20:58:09', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(70, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-01-08 20:58:10', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(71, 'Proyectos', 'INSERT', 31, NULL, 'empresas', '2025-01-08 21:32:04', 'Se insertó un proyecto: Prueba'),
+(68, 'Proyectos', 'INSERT', 30, 0, 'empresas', '2024-11-24 16:23:34', 'Se insertó un proyecto: Prueba'),
+(69, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2025-01-08 20:58:09', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(70, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2025-01-08 20:58:10', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(71, 'Proyectos', 'INSERT', 31, 0, 'empresas', '2025-01-08 21:32:04', 'Se insertó un proyecto: Prueba'),
 (72, 'interesados_proyecto', 'INSERT', 8, 4, '0', '2025-01-09 20:20:19', 'Se insertó un interesado: Suguru Geto'),
-(73, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-01-11 21:11:26', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(74, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-01-13 03:39:05', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(75, 'Proyectos', 'UPDATE', 7, NULL, 'freelancers', '2025-01-13 03:39:37', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
-(76, 'Proyectos', 'UPDATE', 8, NULL, 'empresas', '2025-01-13 03:40:18', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
-(77, 'Proyectos', 'UPDATE', 31, NULL, 'empresas', '2025-01-13 03:42:01', 'Se actualizó el proyecto: Prueba'),
-(78, 'Proyectos', 'UPDATE', 31, NULL, 'empresas', '2025-01-13 03:46:07', 'Se actualizó el proyecto: Creación de una dApp'),
-(79, 'Proyectos', 'UPDATE', 31, NULL, 'empresas', '2025-01-13 03:47:10', 'Se actualizó el proyecto: Creación de una dApp'),
+(73, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2025-01-11 21:11:26', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(74, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2025-01-13 03:39:05', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(75, 'Proyectos', 'UPDATE', 7, 0, 'freelancers', '2025-01-13 03:39:37', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
+(76, 'Proyectos', 'UPDATE', 8, 0, 'empresas', '2025-01-13 03:40:18', 'Se actualizó el proyecto: Desarrollo de Software Personalizado para Cliente F'),
+(77, 'Proyectos', 'UPDATE', 31, 0, 'empresas', '2025-01-13 03:42:01', 'Se actualizó el proyecto: Prueba'),
+(78, 'Proyectos', 'UPDATE', 31, 0, 'empresas', '2025-01-13 03:46:07', 'Se actualizó el proyecto: Creación de una dApp'),
+(79, 'Proyectos', 'UPDATE', 31, 0, 'empresas', '2025-01-13 03:47:10', 'Se actualizó el proyecto: Creación de una dApp'),
 (80, 'interesados_proyecto', 'INSERT', 9, 1, '0', '2025-01-13 03:59:40', 'Se insertó un interesado: Satoru Gojo'),
-(81, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-03-09 20:00:50', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(82, 'Proyectos', 'UPDATE', 2, NULL, 'empresas', '2025-03-09 20:06:15', 'Se actualizó el proyecto: Rediseño de Página Webs'),
-(83, 'Proyectos', 'UPDATE', 7, NULL, 'freelancers', '2025-03-09 22:05:07', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
-(84, 'Proyectos', 'UPDATE', 7, NULL, 'freelancers', '2025-03-10 00:38:02', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
-(85, 'Proyectos', 'UPDATE', 7, NULL, 'freelancers', '2025-03-10 00:38:39', 'Se actualizó el proyecto: Creación de Contenido para Blog');
+(81, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2025-03-09 20:00:50', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(82, 'Proyectos', 'UPDATE', 2, 0, 'empresas', '2025-03-09 20:06:15', 'Se actualizó el proyecto: Rediseño de Página Webs'),
+(83, 'Proyectos', 'UPDATE', 7, 0, 'freelancers', '2025-03-09 22:05:07', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
+(84, 'Proyectos', 'UPDATE', 7, 0, 'freelancers', '2025-03-10 00:38:02', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
+(85, 'Proyectos', 'UPDATE', 7, 0, 'freelancers', '2025-03-10 00:38:39', 'Se actualizó el proyecto: Creación de Contenido para Blog'),
+(86, 'Empresas', 'INSERT', 10, 10, 'empresa', '2025-03-16 14:17:29', 'Se insertó una empresa: Prueba'),
+(87, 'interesados_proyecto', 'INSERT', 10, 1, '0', '2025-03-30 01:21:53', 'Se insertó un interesado: Satoru Gojo'),
+(88, 'interesados_proyecto', 'INSERT', 11, 1, '0', '2025-03-30 01:26:09', 'Se insertó un interesado: Satoru Gojo'),
+(89, 'interesados_proyecto', 'INSERT', 12, 1, '0', '2025-03-30 01:27:38', 'Se insertó un interesado: Satoru Gojo'),
+(90, 'interesados_proyecto', 'INSERT', 13, 1, '0', '2025-03-30 01:29:48', 'Se insertó un interesado: Satoru Gojo'),
+(91, 'interesados_proyecto', 'INSERT', 14, 1, '0', '2025-03-30 02:05:15', 'Se insertó un interesado: Satoru Gojo'),
+(92, 'interesados_proyecto', 'INSERT', 15, 1, '0', '2025-03-30 02:07:07', 'Se insertó un interesado: Satoru Gojo'),
+(93, 'interesados_proyecto', 'INSERT', 16, 1, '0', '2025-03-30 02:10:08', 'Se insertó un interesado: Satoru Gojo'),
+(94, 'interesados_proyecto', 'INSERT', 17, 1, '0', '2025-03-30 02:14:55', 'Se insertó un interesado: Satoru Gojo'),
+(95, 'interesados_proyecto', 'INSERT', 18, 1, '0', '2025-03-30 02:17:07', 'Se insertó un interesado: Satoru Gojo'),
+(96, 'interesados_proyecto', 'INSERT', 19, 1, '0', '2025-03-30 02:17:32', 'Se insertó un interesado: Satoru Gojo'),
+(97, 'interesados_proyecto', 'INSERT', 20, 1, '0', '2025-03-30 02:25:06', 'Se insertó un interesado: Satoru Gojo'),
+(98, 'interesados_proyecto', 'INSERT', 21, 1, '0', '2025-03-30 02:48:40', 'Se insertó un interesado: Satoru Gojo'),
+(99, 'interesados_proyecto', 'INSERT', 22, 1, '0', '2025-03-30 02:56:47', 'Se insertó un interesado: Satoru Gojo'),
+(100, 'interesados_proyecto', 'INSERT', 23, 1, '0', '2025-03-30 03:01:11', 'Se insertó un interesado: Satoru Gojo'),
+(101, 'interesados_proyecto', 'INSERT', 24, 1, '0', '2025-03-30 03:27:23', 'Se insertó un interesado: Satoru Gojo'),
+(102, 'interesados_proyecto', 'INSERT', 25, 1, '0', '2025-03-30 03:30:28', 'Se insertó un interesado: Satoru Gojo'),
+(103, 'interesados_proyecto', 'INSERT', 26, 1, 'freelancers', '2025-03-30 03:31:42', 'Se insertó un interesado: Satoru Gojo'),
+(104, 'interesados_proyecto', 'INSERT', 27, 1, 'freelancers', '2025-03-30 03:32:29', 'Se insertó un interesado: Satoru Gojo'),
+(105, 'freelancers', 'LOGIN', 1, 1, 'freelancers', '2025-06-22 23:43:02', 'Inicio de sesión exitoso desde tabla freelancers'),
+(106, 'freelancers', 'LOGIN', 1, 1, 'freelancers', '2025-06-22 23:47:39', 'Inicio de sesión exitoso desde tabla freelancers'),
+(107, 'empresas', 'LOGIN', 4, 4, 'empresas', '2025-06-22 23:48:53', 'Inicio de sesión exitoso desde tabla empresas'),
+(108, 'empresas', 'LOGIN', 4, 4, 'empresas', '2025-06-22 23:49:29', 'Inicio de sesión exitoso desde tabla empresas'),
+(109, 'empresas', 'LOGIN', 4, 4, 'empresas', '2025-06-22 23:51:00', 'Inicio de sesión exitoso desde tabla empresas'),
+(110, 'empresas', 'LOGIN', 4, 4, 'empresas', '2025-06-22 23:56:49', 'Inicio de sesión exitoso desde tabla empresas'),
+(111, 'empresas', 'LOGIN', 4, 4, 'empresas', '2025-06-22 23:57:35', 'Inicio de sesión exitoso desde tabla empresas'),
+(112, 'freelancers', 'LOGIN', 1, 1, 'freelancers', '2025-06-23 00:42:10', 'Inicio de sesión exitoso desde tabla freelancers'),
+(113, 'empresas', 'LOGIN', 4, 4, 'empresas', '2025-06-30 01:16:26', 'Inicio de sesión exitoso desde tabla empresas'),
+(114, 'empresas', 'LOGIN', 4, 4, 'empresas', '2025-06-30 01:17:30', 'Inicio de sesión exitoso desde tabla empresas'),
+(115, 'freelancers', 'LOGIN', 1, 1, 'freelancers', '2025-06-30 01:26:43', 'Inicio de sesión exitoso desde tabla freelancers'),
+(116, 'empresas', 'LOGIN', 4, 4, 'empresas', '2025-06-30 01:29:44', 'Inicio de sesión exitoso desde tabla empresas');
 
 -- --------------------------------------------------------
 
@@ -225,26 +256,8 @@ CREATE TABLE `contratistas` (
 --
 
 INSERT INTO `contratistas` (`id`, `nombre`, `email`, `telefono`, `direccion`, `descripcion_necesidades`, `contrasena`, `Estado`, `image_url`, `doc_rif`, `portafolio`, `membership_type`, `membership_start_date`, `membership_end_date`) VALUES
-(1, 'Toji Fushiguro', 'si@gmail.com', '04121234567', 'Tokyo', '', '$2y$10$0FvtGGZICzbCmrP8LOqu6eMuhTlDDFBi8KgH/lvEHNuSzDJQH/0MS', 1, 'https://wallpapers.com/images/hd/toji-fushiguro-1920-x-1075-wallpaper-wsutogtc14vfrme8.jpg', NULL, NULL, NULL, NULL, NULL),
-(2, 'Prueba', 'jmrm19721@gmail.com', '04243363970', 'El Bosque', 'Sí', '$2y$10$aH3Ll2BnBsINkwZfLGQfNeal0FGMnFxz.kuWENmWsJVjx4.QFy7/m', 1, NULL, NULL, NULL, NULL, NULL, NULL);
-
---
--- Disparadores `contratistas`
---
-DELIMITER $$
-CREATE TRIGGER `auditoria_contratistas_insert` AFTER INSERT ON `contratistas` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('contratistas', 'INSERT', NEW.id, NEW.id, 'contratista', CONCAT('Se insertó un contratista: ', NEW.nombre));
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `auditoria_contratistas_update` AFTER UPDATE ON `contratistas` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('contratistas', 'UPDATE', OLD.id, OLD.id, 'contratista', CONCAT('Se actualizó el contratista: ', OLD.nombre));
-END
-$$
-DELIMITER ;
+(1, 'Toji Fushiguro', 'si@gmail.com', '04121234567', 'Tokyo', '', '$2y$10$0FvtGGZICzbCmrP8LOqu6eMuhTlDDFBi8KgH/lvEHNuSzDJQH/0MS', 1, 'https://wallpapers.com/images/hd/toji-fushiguro-1920-x-1075-wallpaper-wsutogtc14vfrme8.jpg', '', '', '', '0000-00-00', '0000-00-00'),
+(2, 'Prueba', 'jmrm19721@gmail.com', '04243363970', 'El Bosque', 'Sí', '$2y$10$aH3Ll2BnBsINkwZfLGQfNeal0FGMnFxz.kuWENmWsJVjx4.QFy7/m', 1, '', '', '', '', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -275,27 +288,10 @@ CREATE TABLE `empresas` (
 --
 
 INSERT INTO `empresas` (`id`, `nombre_empresa`, `email`, `telefono`, `rif`, `direccion`, `descripcion_empresa`, `sitio_web`, `contrasena`, `Estado`, `image_url`, `doc_rif`, `membership_type`, `membership_start_date`, `membership_end_date`) VALUES
-(4, 'Suguru Geto', 'gramolca@gmail.com', '04243363970', 'V-30658992', 'Tokyo', 'Agropecuaria', 'https://gramolcas.com/', '$2y$10$Bjn61VMEpe7uwd72QOYT5u5GnIxe2WK3MZVxVJC83bOkDRNHFTlXi', 1, 'https://miro.medium.com/v2/resize:fit:736/1*GHQ2nQfaZyF81STYtlmAyA.jpeg', NULL, 'gold', '2024-11-24', '2024-12-24'),
-(8, 'no', 'no@gmail.com', '04121234567', 'V-30658992', 'Cagua', 'sos', 'https://si.com/', '$2y$10$cd1hK5MwfoAqd49.k8WlDu0cRrrI.Fx3KGBW035A7KLFzcj8PybAC', 1, NULL, NULL, NULL, NULL, NULL),
-(9, 'Prueba', 'jmrm19722@gmail.com', '04243363970', 'V-30091390', 'El Bosque', 'Sí', 'https://gramolca.com/', '$2y$10$ShsaIzITY0VXGdOSBBTpx.J/vL6Z73z/zgqxjaqEi5yYWY2nnWTh6', 1, NULL, NULL, NULL, NULL, NULL);
-
---
--- Disparadores `empresas`
---
-DELIMITER $$
-CREATE TRIGGER `auditoria_empresas_insert` AFTER INSERT ON `empresas` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('Empresas', 'INSERT', NEW.id, NEW.id, 'empresa', CONCAT('Se insertó una empresa: ', NEW.nombre_empresa));
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `auditoria_empresas_update` AFTER UPDATE ON `empresas` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('Empresas', 'UPDATE', OLD.id, OLD.id, 'empresa', CONCAT('Se actualizó la empresa: ', OLD.nombre_empresa));
-END
-$$
-DELIMITER ;
+(4, 'Suguru Geto', 'gramolca@gmail.com', '04243363970', 'V-30658992', 'Tokyo', 'Agropecuaria', 'https://gramolcas.com/', '$2y$10$Bjn61VMEpe7uwd72QOYT5u5GnIxe2WK3MZVxVJC83bOkDRNHFTlXi', 1, 'https://miro.medium.com/v2/resize:fit:736/1*GHQ2nQfaZyF81STYtlmAyA.jpeg', '', 'basic', '2024-11-24', '2024-12-24'),
+(8, 'no', 'no@gmail.com', '04121234567', 'V-30658992', 'Cagua', 'sos', 'https://si.com/', '$2y$10$cd1hK5MwfoAqd49.k8WlDu0cRrrI.Fx3KGBW035A7KLFzcj8PybAC', 1, '', '', '', '0000-00-00', '0000-00-00'),
+(9, 'Prueba', 'jmrm19722@gmail.com', '04243363970', 'V-30091390', 'El Bosque', 'Sí', 'https://gramolca.com/', '$2y$10$ShsaIzITY0VXGdOSBBTpx.J/vL6Z73z/zgqxjaqEi5yYWY2nnWTh6', 1, '', '', '', '0000-00-00', '0000-00-00'),
+(10, 'Prueba', 'miguelrg2004@hotmail.com', '04243363970', '3000284102', 'El Bosque', 'Prueba', 'https://www.google.com/?safe=active&ssui=on', '$2y$10$bwH.jjHbscvrrVB0SgQq3.KRqaZdSgYfzUIfoqGDeresmPKepWwJe', 1, '', '', '', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -325,26 +321,8 @@ CREATE TABLE `freelancers` (
 --
 
 INSERT INTO `freelancers` (`id`, `nombre`, `email`, `telefono`, `direccion`, `descripcion_habilidades`, `curriculum`, `portafolio`, `contrasena`, `Estado`, `image_url`, `membership_type`, `membership_start_date`, `membership_end_date`) VALUES
-(1, 'Satoru Gojo', 'eloy@gmail.com', '04128849077', 'Tokyo', 'tecnico de servidores', 'C:\\xampp\\htdocs\\Anderson\\Includes/../Assets/doc/Folleto Comunitario (2)_20241021_000911_0000.pdf', 'https://www.github.com', '$2y$10$te3OwYwUbck26ME0w0lTEutTbvDFXaL95IVclL3vYxembaWLtniMK', 1, 'https://cdn.chatfai.com/public_characters/ssmHlayEkdP03mM4xKJam1kwmOe2/c43f2674-0e42-4e8b-8219-7dd53f180afathumb-1920-1332281.jpeg', NULL, NULL, NULL),
-(18, 'yo', 'yo@gmail.com', '04128849077', 'Santa Cruz', 'si', NULL, 'https://www.github.com', '$2y$10$omQQ5fbNy1nsFdjiNamgfOBQOfKE92GkFwYPvQ.851FBvTb7qd6Ii', 1, NULL, NULL, NULL, NULL);
-
---
--- Disparadores `freelancers`
---
-DELIMITER $$
-CREATE TRIGGER `auditoria_freelancers_insert` AFTER INSERT ON `freelancers` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('Freelancers', 'INSERT', NEW.id, NEW.id, 'freelancer', CONCAT('Se insertó un freelancer: ', NEW.nombre));
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `auditoria_freelancers_update` AFTER UPDATE ON `freelancers` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('Freelancers', 'UPDATE', OLD.id, OLD.id, 'freelancer', CONCAT('Se actualizó el freelancer: ', OLD.nombre));
-END
-$$
-DELIMITER ;
+(1, 'Satoru Gojo', 'eloy@gmail.com', '04128849077', 'Tokyo', 'tecnico de servidores', 'C:\\xampp\\htdocs\\Anderson\\Includes/../Assets/doc/Folleto Comunitario (2)_20241021_000911_0000.pdf', 'https://www.github.com', '$2y$10$te3OwYwUbck26ME0w0lTEutTbvDFXaL95IVclL3vYxembaWLtniMK', 1, 'https://cdn.chatfai.com/public_characters/ssmHlayEkdP03mM4xKJam1kwmOe2/c43f2674-0e42-4e8b-8219-7dd53f180afathumb-1920-1332281.jpeg', 'gold', '2025-06-30', '2025-07-30'),
+(18, 'yo', 'yo@gmail.com', '04128849077', 'Santa Cruz', 'si', '', 'https://www.github.com', '$2y$10$omQQ5fbNy1nsFdjiNamgfOBQOfKE92GkFwYPvQ.851FBvTb7qd6Ii', 1, '', '', '0000-00-00', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -372,27 +350,7 @@ CREATE TABLE `interesados_proyecto` (
 INSERT INTO `interesados_proyecto` (`id`, `nombre_interesado`, `email_interesado`, `telefono_interesado`, `id_proyecto`, `nombre_proyecto`, `creador_id`, `tipo_usuario_creador`, `usuario_id`, `rol_solicitante`) VALUES
 (5, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 8, 'Desarrollo de Software Personalizado para Cliente F', 4, 'empresas', 1, 'freelancers'),
 (6, 'Satoru Gojo', 'jmrm19722@gmail.com', '3080754', 2, 'Rediseño de Página Webs', 4, 'empresas', 1, 'freelancers'),
-(7, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 7, 'Creación de Contenido para Blog', 1, 'freelancers', 4, 'empresas'),
-(8, 'Suguru Geto', 'gramolca@gmail.com', '04243363970', 31, 'Prueba', 0, '', 4, '0'),
-(9, 'Satoru Gojo', 'eloy@gmail.com', '04128849077', 31, 'Creación de una dApp', 0, '', 1, '0');
-
---
--- Disparadores `interesados_proyecto`
---
-DELIMITER $$
-CREATE TRIGGER `auditoria_interesados_insert` AFTER INSERT ON `interesados_proyecto` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('interesados_proyecto', 'INSERT', NEW.id, NEW.usuario_id, NEW.rol_solicitante, CONCAT('Se insertó un interesado: ', NEW.nombre_interesado));
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `auditoria_interesados_update` AFTER UPDATE ON `interesados_proyecto` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('interesados_proyecto', 'UPDATE', OLD.id, OLD.usuario_id, OLD.rol_solicitante, CONCAT('Se actualizó el interesado: ', OLD.nombre_interesado));
-END
-$$
-DELIMITER ;
+(7, 'Satoru Gojo', 'jmrm19722@gmail.com', '04243363970', 7, 'Creación de Contenido para Blog', 1, 'freelancers', 4, 'empresas');
 
 -- --------------------------------------------------------
 
@@ -416,9 +374,8 @@ CREATE TABLE `membership_purchases` (
 --
 
 INSERT INTO `membership_purchases` (`id`, `user_id`, `membership_type`, `purchase_date`, `expiration_date`, `amount`, `payment_status`, `role`) VALUES
-(1, 4, 'basic', '2024-11-24', '2024-12-24', 15.00, 'completed', 'empresas'),
-(4, 4, 'silver', '2024-11-24', '2024-12-24', 30.00, 'completed', 'empresas'),
-(5, 4, 'gold', '2024-11-24', '2024-12-24', 50.00, 'completed', 'empresas');
+(1, 4, 'basic', '2025-05-24', '2025-07-24', 15.00, 'completed', 'empresas'),
+(6, 1, 'gold', '2024-06-30', '2024-07-30', 50.00, 'completed', 'freelancers');
 
 -- --------------------------------------------------------
 
@@ -490,28 +447,10 @@ CREATE TABLE `proyectos` (
 --
 
 INSERT INTO `proyectos` (`id`, `tipo_usuario`, `contratista_id`, `freelancer_id`, `empresa_id`, `titulo`, `descripcion`, `image_url`, `categoria_id`, `precio`, `estado`, `fecha_inicio`, `fecha_fin`, `fecha_registro`, `intereses`, `Etiqueta`, `repositorio`, `terminado`, `pago`) VALUES
-(2, 'empresas', NULL, NULL, 4, 'Rediseño de Página Webs', 'Rediseño completo de una página web para una empresa de moda.', 'https://pixelemos.com/wp-content/uploads/2017/06/como-crear-un-sitio-web.jpg', 1, 1500.00, 1, '2025-01-13', '2025-02-05', '2024-08-28 13:07:06', 'Diseño web, UX/UI, Desarrollo frontend', 'Oferta', 'https://github.com/', 'Sí', 'Pagado'),
-(7, 'freelancers', NULL, 1, NULL, 'Creación de Contenido para Blog', 'Creación de artículos y contenido de alta calidad para el blog E, con enfoque en SEO y estrategias de contenido.', 'https://i0.wp.com/res.cloudinary.com/djdesignerlab/image/upload/v1602264211/wp-uploads/SEO-Strategies-min_pn3uwz.jpg?w=1080&ssl=1', 1, 750.00, 1, '2025-01-13', '2025-02-20', '2024-08-28 13:56:21', 'Redacción de contenido, Estrategias de SEO', 'Oferta', NULL, 'Sí', 'Pagado'),
-(8, 'empresas', NULL, NULL, 4, 'Desarrollo de Software Personalizado para Cliente F', 'Desarrollo de un software personalizado para la empresa cliente F, incluyendo análisis, diseño y programación.', 'https://softwarewebsas.com/public/images/blog/dev.webp', 1, 3500.00, 1, '2025-01-13', '2025-03-15', '2024-08-28 13:57:03', 'Desarrollo de software, Personalización', 'Servicio', 'https://github.com', 'Sí', 'Pendiente'),
-(31, 'empresas', NULL, NULL, 4, 'Creación de una dApp', 'Crear una dApp con Scaffold-ETH-2 para la administración de una DAO.', 'https://miro.medium.com/v2/resize:fit:400/0*RnvmtiFbfDWsZu6N.jpg', 1, 12.00, 1, '2025-01-08', '2025-01-09', '2025-01-08 21:32:04', 'Una dApp que asigne tareas a los contribuyentes de la DAO y que obtengan recompensas al cobrarlas. ', 'Oferta', NULL, 'No', 'Pendiente');
-
---
--- Disparadores `proyectos`
---
-DELIMITER $$
-CREATE TRIGGER `auditoria_proyectos_insert` AFTER INSERT ON `proyectos` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('Proyectos', 'INSERT', NEW.id, NEW.contratista_id, NEW.tipo_usuario, CONCAT('Se insertó un proyecto: ', NEW.titulo));
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `auditoria_proyectos_update` AFTER UPDATE ON `proyectos` FOR EACH ROW BEGIN
-    INSERT INTO Auditoria (tabla, operacion, id_registro, usuario_id, rol_usuario, descripcion)
-    VALUES ('Proyectos', 'UPDATE', OLD.id, OLD.contratista_id, OLD.tipo_usuario, CONCAT('Se actualizó el proyecto: ', OLD.titulo));
-END
-$$
-DELIMITER ;
+(2, 'empresas', 0, 0, 4, 'Rediseño de Página Webs', 'Rediseño completo de una página web para una empresa de moda.', 'https://pixelemos.com/wp-content/uploads/2017/06/como-crear-un-sitio-web.jpg', 1, 1500.00, 1, '2025-01-13', '2025-02-05', '2024-08-28 13:07:06', 'Diseño web, UX/UI, Desarrollo frontend', 'Oferta', 'https://github.com/', 'Sí', 'Pagado'),
+(7, 'freelancers', 0, 1, 0, 'Creación de Contenido para Blog', 'Creación de artículos y contenido de alta calidad para el blog E, con enfoque en SEO y estrategias de contenido.', 'https://i0.wp.com/res.cloudinary.com/djdesignerlab/image/upload/v1602264211/wp-uploads/SEO-Strategies-min_pn3uwz.jpg?w=1080&ssl=1', 1, 750.00, 1, '2025-01-13', '2025-02-20', '2024-08-28 13:56:21', 'Redacción de contenido, Estrategias de SEO', 'Oferta', '', 'Sí', 'Pagado'),
+(8, 'empresas', 0, 0, 4, 'Desarrollo de Software Personalizado para Cliente F', 'Desarrollo de un software personalizado para la empresa cliente F, incluyendo análisis, diseño y programación.', 'https://softwarewebsas.com/public/images/blog/dev.webp', 1, 3500.00, 1, '2025-01-13', '2025-03-15', '2024-08-28 13:57:03', 'Desarrollo de software, Personalización', 'Servicio', 'https://github.com', 'Sí', 'Pendiente'),
+(31, 'empresas', 0, 0, 4, 'Creación de una dApp', 'Crear una dApp con Scaffold-ETH-2 para la administración de una DAO.', 'https://miro.medium.com/v2/resize:fit:400/0*RnvmtiFbfDWsZu6N.jpg', 1, 12.00, 1, '2025-01-08', '2025-01-09', '2025-01-08 21:32:04', 'Una dApp que asigne tareas a los contribuyentes de la DAO y que obtengan recompensas al cobrarlas. ', 'Oferta', '', 'No', 'Pendiente');
 
 -- --------------------------------------------------------
 
@@ -539,7 +478,15 @@ INSERT INTO `tareas` (`id`, `proyecto_id`, `descripcion`, `fecha_registro`, `com
 (5, 7, 'Crear Artículo de: Ciencias Naturales', '2025-01-12 23:44:49', 0),
 (6, 7, 'Crear Artíuclo de: Matemáticas', '2025-01-12 23:44:49', 0),
 (7, 8, 'Diseñar Interfaz Gráfica', '2025-01-12 23:45:27', 0),
-(8, 8, 'Programar funcionalidad en PHP', '2025-01-12 23:45:27', 0);
+(8, 8, 'Programar funcionalidad en PHP', '2025-01-12 23:45:27', 0),
+(9, 32, 'as', '2025-06-29 21:18:27', 0),
+(10, 32, 'as', '2025-06-29 21:18:27', 0),
+(11, 33, 'as', '2025-06-29 21:18:47', 0),
+(12, 33, 'qw', '2025-06-29 21:18:47', 0),
+(13, 34, 'as', '2025-06-29 21:18:59', 0),
+(14, 34, 'qw', '2025-06-29 21:18:59', 0),
+(15, 35, 'as', '2025-06-29 21:21:10', 0),
+(16, 35, 'qw', '2025-06-29 21:21:10', 0);
 
 -- --------------------------------------------------------
 
@@ -698,7 +645,7 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `auditoria`
 --
 ALTER TABLE `auditoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -722,7 +669,7 @@ ALTER TABLE `contratistas`
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `freelancers`
@@ -734,13 +681,13 @@ ALTER TABLE `freelancers`
 -- AUTO_INCREMENT de la tabla `interesados_proyecto`
 --
 ALTER TABLE `interesados_proyecto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `membership_purchases`
 --
 ALTER TABLE `membership_purchases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `messages`
@@ -752,13 +699,13 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT de la tabla `proyectos`
 --
 ALTER TABLE `proyectos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `tareas`
 --
 ALTER TABLE `tareas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios_aceptados`
